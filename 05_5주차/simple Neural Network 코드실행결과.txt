@@ -1,0 +1,101 @@
+(venv) climate@mimic:~/workspace$ python main.py 
+Downloading http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz
+Failed to download (trying next):
+HTTP Error 403: Forbidden
+
+Downloading https://ossci-datasets.s3.amazonaws.com/mnist/train-images-idx3-ubyte.gz
+Downloading https://ossci-datasets.s3.amazonaws.com/mnist/train-images-idx3-ubyte.gz to ./data/MNIST/raw/train-images-idx3-ubyte.gz
+9913344it [00:01, 5387004.54it/s]                                                                                                                                                                     
+Extracting ./data/MNIST/raw/train-images-idx3-ubyte.gz to ./data/MNIST/raw
+
+Downloading http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz
+Failed to download (trying next):
+HTTP Error 403: Forbidden
+
+Downloading https://ossci-datasets.s3.amazonaws.com/mnist/train-labels-idx1-ubyte.gz
+Downloading https://ossci-datasets.s3.amazonaws.com/mnist/train-labels-idx1-ubyte.gz to ./data/MNIST/raw/train-labels-idx1-ubyte.gz
+29696it [00:00, 161770.06it/s]                                                                                                                                                                        
+Extracting ./data/MNIST/raw/train-labels-idx1-ubyte.gz to ./data/MNIST/raw
+
+Downloading http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz
+Failed to download (trying next):
+HTTP Error 403: Forbidden
+
+Downloading https://ossci-datasets.s3.amazonaws.com/mnist/t10k-images-idx3-ubyte.gz
+Downloading https://ossci-datasets.s3.amazonaws.com/mnist/t10k-images-idx3-ubyte.gz to ./data/MNIST/raw/t10k-images-idx3-ubyte.gz
+1649664it [00:01, 1370579.21it/s]                                                                                                                                                                     
+Extracting ./data/MNIST/raw/t10k-images-idx3-ubyte.gz to ./data/MNIST/raw
+
+Downloading http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz
+Failed to download (trying next):
+HTTP Error 403: Forbidden
+
+Downloading https://ossci-datasets.s3.amazonaws.com/mnist/t10k-labels-idx1-ubyte.gz
+Downloading https://ossci-datasets.s3.amazonaws.com/mnist/t10k-labels-idx1-ubyte.gz to ./data/MNIST/raw/t10k-labels-idx1-ubyte.gz
+5120it [00:00, 3003893.76it/s]                                                                                                                                                                        
+Extracting ./data/MNIST/raw/t10k-labels-idx1-ubyte.gz to ./data/MNIST/raw
+
+Train Epoch: 1 [0/60000 (0%)]   Loss: 2.334651
+Train Epoch: 1 [6400/60000 (11%)]       Loss: 2.309333
+Train Epoch: 1 [12800/60000 (21%)]      Loss: 2.342912
+Train Epoch: 1 [19200/60000 (32%)]      Loss: 2.322329
+Train Epoch: 1 [25600/60000 (43%)]      Loss: 2.332080
+Train Epoch: 1 [32000/60000 (53%)]      Loss: 2.346070
+Train Epoch: 1 [38400/60000 (64%)]      Loss: 2.307447
+Train Epoch: 1 [44800/60000 (75%)]      Loss: 2.311491
+Train Epoch: 1 [51200/60000 (85%)]      Loss: 2.332282
+Train Epoch: 1 [57600/60000 (96%)]      Loss: 2.331196
+
+Test set: Average loss: 0.0365, Accuracy: 1266/10000 (13%)
+
+Train Epoch: 2 [0/60000 (0%)]   Loss: 2.361296
+Train Epoch: 2 [6400/60000 (11%)]       Loss: 2.329254
+Train Epoch: 2 [12800/60000 (21%)]      Loss: 2.352356
+Train Epoch: 2 [19200/60000 (32%)]      Loss: 2.358862
+Train Epoch: 2 [25600/60000 (43%)]      Loss: 2.309380
+Train Epoch: 2 [32000/60000 (53%)]      Loss: 2.338017
+Train Epoch: 2 [38400/60000 (64%)]      Loss: 2.292669
+Train Epoch: 2 [44800/60000 (75%)]      Loss: 2.344020
+Train Epoch: 2 [51200/60000 (85%)]      Loss: 2.289536
+Train Epoch: 2 [57600/60000 (96%)]      Loss: 2.338898
+
+Test set: Average loss: 0.0365, Accuracy: 1266/10000 (13%)
+
+Train Epoch: 3 [0/60000 (0%)]   Loss: 2.365968
+Train Epoch: 3 [6400/60000 (11%)]       Loss: 2.338812
+Train Epoch: 3 [12800/60000 (21%)]      Loss: 2.325833
+Train Epoch: 3 [19200/60000 (32%)]      Loss: 2.308351
+Train Epoch: 3 [25600/60000 (43%)]      Loss: 2.316312
+Train Epoch: 3 [32000/60000 (53%)]      Loss: 2.322115
+Train Epoch: 3 [38400/60000 (64%)]      Loss: 2.316361
+Train Epoch: 3 [44800/60000 (75%)]      Loss: 2.342413
+Train Epoch: 3 [51200/60000 (85%)]      Loss: 2.377423
+Train Epoch: 3 [57600/60000 (96%)]      Loss: 2.325765
+
+Test set: Average loss: 0.0365, Accuracy: 1266/10000 (13%)
+
+Train Epoch: 4 [0/60000 (0%)]   Loss: 2.324882
+Train Epoch: 4 [6400/60000 (11%)]       Loss: 2.316345
+Train Epoch: 4 [12800/60000 (21%)]      Loss: 2.315937
+Train Epoch: 4 [19200/60000 (32%)]      Loss: 2.311989
+Train Epoch: 4 [25600/60000 (43%)]      Loss: 2.330463
+Train Epoch: 4 [32000/60000 (53%)]      Loss: 2.290489
+Train Epoch: 4 [38400/60000 (64%)]      Loss: 2.279104
+Train Epoch: 4 [44800/60000 (75%)]      Loss: 2.291463
+Train Epoch: 4 [51200/60000 (85%)]      Loss: 2.340340
+Train Epoch: 4 [57600/60000 (96%)]      Loss: 2.312864
+
+Test set: Average loss: 0.0365, Accuracy: 1266/10000 (13%)
+
+Train Epoch: 5 [0/60000 (0%)]   Loss: 2.291011
+Train Epoch: 5 [6400/60000 (11%)]       Loss: 2.322216
+Train Epoch: 5 [12800/60000 (21%)]      Loss: 2.356305
+Train Epoch: 5 [19200/60000 (32%)]      Loss: 2.315032
+Train Epoch: 5 [25600/60000 (43%)]      Loss: 2.295544
+Train Epoch: 5 [32000/60000 (53%)]      Loss: 2.299571
+Train Epoch: 5 [38400/60000 (64%)]      Loss: 2.290748
+Train Epoch: 5 [44800/60000 (75%)]      Loss: 2.314560
+Train Epoch: 5 [51200/60000 (85%)]      Loss: 2.334334
+Train Epoch: 5 [57600/60000 (96%)]      Loss: 2.296158
+
+Test set: Average loss: 0.0365, Accuracy: 1266/10000 (13%)
