@@ -36,7 +36,7 @@ class CustomDataset(Dataset):
 
 # CVAE 모델 정의
 class Encoder(nn.Module):
-    def __init__(self, input_dim, seq_len, latent_dim, condition_dim, dropout_prob=0.5):
+    def __init__(self, input_dim, seq_len, latent_dim, condition_dim, dropout_prob=0.2):
         super(Encoder, self).__init__()
         self.conv1 = nn.Conv1d(input_dim, 128, kernel_size=12, padding=6)
         self.bn1 = nn.BatchNorm1d(num_features=128)
@@ -95,7 +95,7 @@ class Encoder(nn.Module):
         return mu, logvar, indices1, indices2, indices3
 
 class Decoder(nn.Module):
-    def __init__(self, latent_dim, seq_len, output_dim, condition_dim, dropout_prob=0.5):
+    def __init__(self, latent_dim, seq_len, output_dim, condition_dim, dropout_prob=0.2):
         super(Decoder, self).__init__()
         self.fc1 = nn.Linear(latent_dim + condition_dim, 512)
         self.fc2 = nn.Linear(512, 128 * seq_len)
