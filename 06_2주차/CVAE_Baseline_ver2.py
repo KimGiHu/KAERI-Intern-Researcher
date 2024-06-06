@@ -45,21 +45,21 @@ class Encoder(nn.Module):
 
         self.conv2 = nn.Conv1d(128, 128, kernel_size=12, padding=6)
         self.bn2 = nn.BatchNorm1d(num_features=128)
-        self.pool2 = nn.MaxPool1d(kernel_size=2, stride=2, return_indices=True)
+        # self.pool2 = nn.MaxPool1d(kernel_size=2, stride=2, return_indices=True)
         self.conv2_dropout = nn.Dropout(p=dropout_prob)
 
         self.conv3 = nn.Conv1d(128, 128, kernel_size=12, padding=6)
         self.bn3 = nn.BatchNorm1d(num_features=128)
-        self.pool3 = nn.MaxPool1d(kernel_size=2, stride=2, return_indices=True)
+        # self.pool3 = nn.MaxPool1d(kernel_size=2, stride=2, return_indices=True)
         self.conv3_dropout = nn.Dropout(p=dropout_prob)
 
         def calc_seq_len(seq_len):
             seq_len = (seq_len + 2 * 3 - 6) // 1 + 1  # conv1
             seq_len = (seq_len - 2) // 2 + 1           # pool1
             seq_len = (seq_len + 2 * 3 - 6) // 1 + 1  # conv2
-            seq_len = (seq_len - 2) // 2 + 1           # pool2
+            # seq_len = (seq_len - 2) // 2 + 1           # pool2
             seq_len = (seq_len + 2 * 3 - 6) // 1 + 1  # conv3
-            seq_len = (seq_len - 2) // 2 + 1           # pool3
+            # seq_len = (seq_len - 2) // 2 + 1           # pool3
             return seq_len
 
         self.seq_len = calc_seq_len(seq_len)
@@ -78,13 +78,13 @@ class Encoder(nn.Module):
         x = self.conv2(x)
         x = self.bn2(x)
         x = torch.relu(x)
-        x, indices2 = self.pool2(x)
+        # x, indices2 = self.pool2(x)
         x = self.conv2_dropout(x)
         
         x = self.conv3(x)
         x = self.bn3(x)
         x = torch.relu(x)
-        x, indices3 = self.pool3(x)
+        # x, indices3 = self.pool3(x)
         x = self.conv3_dropout(x)
 
         x = x.view(x.size(0), -1) 
@@ -92,7 +92,8 @@ class Encoder(nn.Module):
         x = torch.cat([x, c], dim=-1)
         mu = self.fc_mu(x)
         logvar = self.fc_logvar(x)
-        return mu, logvar, indices1, indices2, indices3
+        # return mu, logvar, indices1, indices2, indices3
+        return mu, logvar, indices1
 
 class Decoder(nn.Module):
     def __init__(self, latent_dim, seq_len, output_dim, condition_dim, dropout_prob=0.2):
@@ -101,12 +102,12 @@ class Decoder(nn.Module):
         self.fc2 = nn.Linear(512, 128 * seq_len)
         self.dropout = nn.Dropout(p=dropout_prob)
         
-        self.unpool1 = nn.MaxUnpool1d(kernel_size=2, stride=2)
+        # self.unpool1 = nn.MaxUnpool1d(kernel_size=2, stride=2)
         self.bn1 = nn.BatchNorm1d(num_features=128)
         self.trans_conv1 = nn.ConvTranspose1d(128, 128, kernel_size=12, padding=6)
         self.conv1_dropout = nn.Dropout(p=dropout_prob)
 
-        self.unpool2 = nn.MaxUnpool1d(kernel_size=2, stride=2)
+        # self.unpool2 = nn.MaxUnpool1d(kernel_size=2, stride=2)
         self.bn2 = nn.BatchNorm1d(num_features=128)
         self.trans_conv2 = nn.ConvTranspose1d(128, 128, kernel_size=12, padding=6)
         self.conv2_dropout = nn.Dropout(p=dropout_prob)
@@ -115,17 +116,18 @@ class Decoder(nn.Module):
         self.trans_conv3 = nn.ConvTranspose1d(128, output_dim, kernel_size=12, padding=6)
         self.conv3_dropout = nn.Dropout(p=dropout_prob)
 
-    def forward(self, z, c, indices1, indices2, indices3):
+    # def forward(self, z, c, indices1, indices2, indices3):
+    def forward(self, z, c, indices1):
         z = torch.cat([z, c], dim=-1)
         h = self.dropout(torch.relu(self.fc1(z)))
         h = self.dropout(torch.relu(self.fc2(h)))
         h = h.view(h.size(0), 128, -1)
         
-        h = self.unpool1(h, indices3, output_size=(h.size(0), 128, h.size(2) * 2))
+        # h = self.unpool1(h, indices3, output_size=(h.size(0), 128, h.size(2) * 2))
         h = self.bn1(self.conv1_dropout(torch.relu(self.trans_conv1(h))))
         
         
-        h = self.unpool2(h, indices2, output_size=(h.size(0), 128, h.size(2) * 2 + 1))
+        # h = self.unpool2(h, indices2, output_size=(h.size(0), 128, h.size(2) * 2 + 1))
         h = self.bn2(self.conv2_dropout(torch.relu(self.trans_conv2(h))))
         
 
@@ -145,9 +147,10 @@ class CVAE(nn.Module):
         return mu + eps * std
 
     def forward(self, x, c):
-        mu, logvar, indices1, indices2, indices3 = self.encoder(x, c)
+        # mu, logvar, indices1, indices2, indices3 = self.encoder(x, c)
+        mu, logvar, indices1= self.encoder(x, c)
         z = self.reparameterize(mu, logvar)
-        x_recon = self.decoder(z, c, indices1, indices2, indices3)
+        x_recon = self.decoder(z, c, indices1)
         return x_recon, mu, logvar
 
 # 손실 함수 정의
