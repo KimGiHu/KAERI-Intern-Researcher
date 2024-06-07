@@ -67,6 +67,7 @@ class Encoder(nn.Module):
         self.fc_mu = nn.Linear(512 + condition_dim, latent_dim)
         self.fc_logvar = nn.Linear(512 + condition_dim, latent_dim)
         self.dropout = nn.Dropout(p=dropout_prob)
+        self.bn0 = nn.BatchNorm1d(num_features=512)
 
     def forward(self, x, c):
         x = self.conv1(x)
@@ -88,7 +89,7 @@ class Encoder(nn.Module):
         x = self.conv3_dropout(x)
 
         x = x.view(x.size(0), -1) 
-        x = self.dropout(torch.relu(self.fc(x)))
+        x = self.dropout(torch.relu(self.bn0(self.fc(x))))
         x = torch.cat([x, c], dim=-1)
         mu = self.fc_mu(x)
         logvar = self.fc_logvar(x)
@@ -100,6 +101,7 @@ class Decoder(nn.Module):
         self.fc1 = nn.Linear(latent_dim + condition_dim, 512)
         self.fc2 = nn.Linear(512, 128 * seq_len)
         self.dropout = nn.Dropout(p=dropout_prob)
+        self.bn0 = nn.BatchNorm1d(num_features=128)
 
         self.up1 = nn.Upsample(scale_factor=2)
         self.bn1 = nn.BatchNorm1d(num_features=128)
@@ -121,7 +123,7 @@ class Decoder(nn.Module):
         h = self.dropout(torch.relu(self.fc1(z)))
         h = self.dropout(torch.relu(self.fc2(h)))
         h = h.view(h.size(0), 128, -1)
-        
+        h = self.bn0(h)
         h = self.up1(h)
         h = self.bn1(self.conv1_dropout(torch.relu(self.trans_conv1(h))))
         
@@ -180,6 +182,7 @@ a_FLUX_FAULT_INDICES = np.where(Yanomaly[:, 2] == 'A FLUX Low Fault')[0]
 
 # 총 6개의 A-Flux Fault들 중에서 5개의 데이터를 이어 붙여서, 학습 데이터 셋으로 사용함.
 data = Xanomaly[a_FLUX_FAULT_INDICES[:5],:,:]
+# data = Xnormal[:450,:,:]
 data = MinMaxScaler().fit_transform(data.reshape(-1, data.shape[-1])).reshape(data.shape)
 data = data.transpose(0,2,1)  # (N,14,4500) 형태로 변경하여 Conv1D 입력 형식에 맞춤 
 data = torch.tensor(data, dtype=torch.float32)
