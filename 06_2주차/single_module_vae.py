@@ -178,7 +178,8 @@ Ynormal, Yanomaly = Y[normal_indices,:], Y[fault_indices,:]
 a_FLUX_FAULT_INDICES = np.where(Yanomaly[:, 2] == 'A FLUX Low Fault')[0]
 
 # 총 6개의 A-Flux Fault들 중에서 5개의 데이터를 이어 붙여서, 학습 데이터 셋으로 사용함.
-data = Xanomaly[a_FLUX_FAULT_INDICES[:5],:,:]
+# data = Xanomaly[a_FLUX_FAULT_INDICES[:5],:,:]
+data = Xnormal[:450,:,:]
 data = MinMaxScaler().fit_transform(data.reshape(-1, data.shape[-1])).reshape(data.shape)
 data = data.transpose(0,2,1)  # (N,14,4500) 형태로 변경하여 Conv1D 입력 형식에 맞춤 
 data = torch.tensor(data, dtype=torch.float32)
@@ -229,7 +230,7 @@ for trial in range(num_trials):
 print("모델 학습 완료!")
 
 # 모델 저장
-torch.save(model.state_dict(), "./model/vae_model_epoch15000_trial1.pth")
+torch.save(model.state_dict(), "./model/vae_model_epoch_15000_trial_1.pth")
 
 # 예측 및 결과 시각화
 model.eval()
@@ -250,4 +251,4 @@ for i in range(len(features)):
     plt.title("Original vs Reconstructed")
     if features[i] == 'DV/DT':
         features[i] = 'DV_DT'
-    plt.savefig('./figure/epoch15000_trial1/' + str(features[i]) + '.png', dpi=600)
+    plt.savefig('./figure/epoch15000_trial_1_VAE/' + str(features[i]) + '.png', dpi=600)
