@@ -132,7 +132,6 @@ class Decoder(nn.Module):
         x_recon = self.conv3_dropout(torch.sigmoid(self.trans_conv3(h)))
         return x_recon
     
-    
 class VAE(nn.Module):
     def __init__(self, input_dim, seq_len, latent_dim, dropout_prob=0.2):
         super(VAE, self).__init__()
@@ -178,17 +177,11 @@ Ynormal, Yanomaly = Y[normal_indices,:], Y[fault_indices,:]
 a_FLUX_FAULT_INDICES = np.where(Yanomaly[:, 2] == 'A FLUX Low Fault')[0]
 
 # 총 6개의 A-Flux Fault들 중에서 5개의 데이터를 이어 붙여서, 학습 데이터 셋으로 사용함.
-# data = Xanomaly[a_FLUX_FAULT_INDICES[:5],:,:]
-data = Xnormal[:450,:,:]
+data = Xanomaly[a_FLUX_FAULT_INDICES[:5],:,:]
+# data = Xnormal[:450, :, :]
 data = MinMaxScaler().fit_transform(data.reshape(-1, data.shape[-1])).reshape(data.shape)
 data = data.transpose(0,2,1)  # (N,14,4500) 형태로 변경하여 Conv1D 입력 형식에 맞춤 
 data = torch.tensor(data, dtype=torch.float32)
-
-# 총 6개의 A-Flux Fault 중에서 마지막 인덱스 데이터를 테스트 셋으로 사용함.
-data_test = Xanomaly[a_FLUX_FAULT_INDICES[-1:],:,:]
-data_test = MinMaxScaler().fit_transform(data_test.reshape(-1, data_test.shape[-1])).reshape(data_test.shape)
-data_test = data_test.transpose(0,2,1)
-data_test = torch.tensor(data_test, dtype=torch.float32)
 
 dataset = CustomDataset(data)
 dataloader = DataLoader(dataset, batch_size=16, shuffle=True)
@@ -203,7 +196,7 @@ latent_dim = 512
 
 model = VAE(input_dim, hidden_dim, latent_dim).to(device)
 optimizer = optim.Adam(model.parameters(), lr=1e-5)
-num_epochs = 15000
+num_epochs = 100
 num_trials = 1
 
 # 모델 학습
@@ -230,7 +223,14 @@ for trial in range(num_trials):
 print("모델 학습 완료!")
 
 # 모델 저장
-torch.save(model.state_dict(), "./model/vae_model_epoch_15000_trial_1.pth")
+torch.save(model.state_dict(), "./model/vae_train_abnormal.pth")
+
+# 총 6개의 A-Flux Fault 중에서 마지막 인덱스 데이터를 테스트 셋으로 사용함.
+# data_test = Xanomaly[a_FLUX_FAULT_INDICES[-1:],:,:]
+data_test = Xnormal[451:452,:,:]
+data_test = MinMaxScaler().fit_transform(data_test.reshape(-1, data_test.shape[-1])).reshape(data_test.shape)
+data_test = data_test.transpose(0,2,1)
+data_test = torch.tensor(data_test, dtype=torch.float32)
 
 # 예측 및 결과 시각화
 model.eval()
@@ -251,4 +251,4 @@ for i in range(len(features)):
     plt.title("Original vs Reconstructed")
     if features[i] == 'DV/DT':
         features[i] = 'DV_DT'
-    plt.savefig('./figure/epoch15000_trial_1_VAE/' + str(features[i]) + '.png', dpi=600)
+    plt.savefig('./figure/VAE/abnormal_to_normal/' + str(features[i]) + '.png', dpi=600)
