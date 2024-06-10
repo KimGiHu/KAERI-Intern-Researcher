@@ -3,3 +3,4 @@ Author : M.I. Radaideh∗, C. Pappas, D. Lu, J. Walden, S. Cousineau, Oak Ridge 
 T. Britton, K. Rajput, L. Vidyaratne, M. Schram, Jefferson Laboratory, Newport News, VA, USA
 
 - - - - - - - 
+# Multi-module-based CVAE to predict HVCM faults in the SNS accelerator 논문 구현
