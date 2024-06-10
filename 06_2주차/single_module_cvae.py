@@ -120,9 +120,11 @@ class Decoder(nn.Module):
 
     def forward(self, z, c):
         z = torch.cat([z, c], dim=-1)
+
         h = self.dropout(torch.relu(self.fc1(z)))
         h = self.dropout(torch.relu(self.fc2(h)))
         h = h.view(h.size(0), 128, -1)
+
         h = self.bn0(h)
         h = self.up1(h)
         h = self.bn1(self.conv1_dropout(torch.relu(self.trans_conv1(h))))
@@ -168,32 +170,68 @@ system='RFQ'     # 시스템들( RFQ / DTL / CCL / SCL )  중 하나의 시스�
 
 # 파형 데이터셋 불러오기 (X : N_pulses, N_times, N_features) 과 (Y : N_pulses, N_labels - index, status, type)
 # index : 파형의 path를 알려줌, status : 파형의 정상 또는 오류 여부, type : 정상이라면 Normal, 오류신호일 경우 종류를 표시 
-X = np.load('./hvcm/data/hvcm/%s.npy' % system)
-Y = np.load('./hvcm/data/hvcm/%s_labels.npy' % system, allow_pickle=True)
-time = np.arange(X.shape[1]) * 400e-9 # 타임스텝 : 1.8ms (4500개 샘플씩, 한 샘플당 400ns)
+
+system1='RFQ'     # pick a system to load and plot. Choose RFQ
+system2='DTL'     # pick a system to load and plot. Choose DTL
+system3='CCL'     # pick a system to load and plot. Choose CCL
+system4='SCL'     # pick a system to load and plot. Choose SCL
+
+#load both waveform (X) and labels (Y) datasets for an HVCM module, e.g. RFQ
+X1= np.load('./hvcm/data/hvcm/%s.npy'%system1)   #---> X array has shape: (pulses, times, features)
+Y1=np.load('./hvcm/data/hvcm/%s_labels.npy'%system1, allow_pickle=True)  #---> Y array has shape: (pulses, labels) --> labels are: index, state, type
+time=np.arange(X1.shape[1]) * 400e-9    #create time axis based on the sampling rate 400 ns (for plotting purposes)
+
+#load both waveform (X) and labels (Y) datasets for an HVCM module, e.g. DTL
+X2= np.load('./hvcm/data/hvcm/%s.npy'%system2)   #---> X array has shape: (pulses, times, features)
+Y2=np.load('./hvcm/data/hvcm/%s_labels.npy'%system2, allow_pickle=True)  #---> Y array has shape: (pulses, labels) --> labels are: index, state, type
+
+#load both waveform (X) and labels (Y) datasets for an HVCM module, e.g. CCL
+X3= np.load('./hvcm/data/hvcm/%s.npy'%system3)   #---> X array has shape: (pulses, times, features)
+Y3=np.load('./hvcm/data/hvcm/%s_labels.npy'%system3, allow_pickle=True)  #---> Y array has shape: (pulses, labels) --> labels are: index, state, type
+
+#load both waveform (X) and labels (Y) datasets for an HVCM module, e.g. SCL
+X4= np.load('./hvcm/data/hvcm/%s.npy'%system4)   #---> X array has shape: (pulses, times, features)
+Y4=np.load('./hvcm/data/hvcm/%s_labels.npy'%system4, allow_pickle=True)  #---> Y array has shape: (pulses, labels) --> labels are: index, state, type
+
+time = np.arange(X1.shape[1]) * 400e-9 # 타임스텝 : 1.8ms (4500개 샘플씩, 한 샘플당 400ns)
 
 # 배열 X,Y의 정상 및 오류 데이터들을 분리함
-fault_indices, normal_indices = np.where(Y[:,1] == 'Fault')[0], np.where(Y[:,1] == 'Run')[0] 
-Xnormal, Xanomaly = X[normal_indices,:,:], X[fault_indices,:,:]
-Ynormal, Yanomaly = Y[normal_indices,:], Y[fault_indices,:]
+fault_indices_RFQ, normal_indices_RFQ = np.where(Y1[:,1] == 'Fault')[0], np.where(Y1[:,1] == 'Run')[0] 
+fault_indices_DTL, normal_indices_DTL = np.where(Y2[:,1] == 'Fault')[0], np.where(Y2[:,1] == 'Run')[0]
+fault_indices_CCL, normal_indices_CCL = np.where(Y3[:,1] == 'Fault')[0], np.where(Y3[:,1] == 'Run')[0]
+fault_indices_SCL, normal_indices_SCL = np.where(Y4[:,1] == 'Fault')[0], np.where(Y4[:,1] == 'Run')[0]
+
+Xnormal_RFQ, Xanomaly_RFQ = X1[normal_indices_RFQ,:,:], X1[fault_indices_RFQ,:,:]
+Xnormal_DTL, Xanomaly_DTL = X2[normal_indices_DTL,:,:], X2[fault_indices_DTL,:,:]
+Xnormal_CCL, Xanomaly_CCL = X3[normal_indices_CCL,:,:], X3[fault_indices_CCL,:,:]
+Xnormal_SCL, Xanomaly_SCL = X4[normal_indices_SCL,:,:], X4[fault_indices_SCL,:,:]
+
+Ynormal_RFQ, Yanomaly_RFQ = Y1[normal_indices_RFQ,:], Y1[fault_indices_RFQ,:]
+Ynormal_DTL, Yanomaly_DTL = Y2[normal_indices_DTL,:], Y2[fault_indices_DTL,:]
+Ynormal_CCL, Yanomaly_CCL = Y3[normal_indices_CCL,:], Y3[fault_indices_CCL,:]
+Ynormal_SCL, Yanomaly_SCL = Y4[normal_indices_SCL,:], Y4[fault_indices_SCL,:]
+
+Xnormal_concat = np.concatenate( (Xnormal_RFQ, Xnormal_DTL, Xnormal_CCL, Xnormal_SCL), axis=0 )
+Xanomaly_concat = np.concatenate( (Xanomaly_RFQ, Xanomaly_DTL, Xanomaly_CCL, Xanomaly_SCL), axis=0 )
 
 # 데이터 생성 : A-Flux Low Fault만을 수집
-a_FLUX_FAULT_INDICES = np.where(Yanomaly[:, 2] == 'A FLUX Low Fault')[0]
+a_FLUX_FAULT_INDICES = np.where(Yanomaly_RFQ[:, 2] == 'A FLUX Low Fault')[0]
 
 # 총 6개의 A-Flux Fault들 중에서 5개의 데이터를 이어 붙여서, 학습 데이터 셋으로 사용함.
-data = Xanomaly[a_FLUX_FAULT_INDICES[:5],:,:]
-# data = Xnormal[:450,:,:]
+# data = Xanomaly[a_FLUX_FAULT_INDICES[:6],:,:]
+data = Xnormal_concat[:-6,:,:]
 data = MinMaxScaler().fit_transform(data.reshape(-1, data.shape[-1])).reshape(data.shape)
 data = data.transpose(0,2,1)  # (N,14,4500) 형태로 변경하여 Conv1D 입력 형식에 맞춤 
 data = torch.tensor(data, dtype=torch.float32)
-labels = torch.zeros((data.shape[0], 1), dtype=torch.float32)
+labels = torch.zeros((16, 1), dtype=torch.float32)
 
 # 총 6개의 A-Flux Fault 중에서 마지막 인덱스 데이터를 테스트 셋으로 사용함.
-data_test = Xanomaly[a_FLUX_FAULT_INDICES[-1:],:,:]
+data_test = Xanomaly_RFQ[a_FLUX_FAULT_INDICES[-1:],:,:]
+# data_test = Xnormal[0:,:,:]
 data_test = MinMaxScaler().fit_transform(data_test.reshape(-1, data_test.shape[-1])).reshape(data_test.shape)
 data_test = data_test.transpose(0,2,1)
 data_test = torch.tensor(data_test, dtype=torch.float32)
-label_test = torch.zeros((data_test.shape[0], 1), dtype=torch.float32)
+label_test = torch.ones((data_test.shape[0], 1), dtype=torch.float32)
 
 dataset = CustomDataset(data)
 dataloader = DataLoader(dataset, batch_size=16, shuffle=True)
@@ -209,7 +247,7 @@ condition_dim = 1
 
 model = CVAE(input_dim, hidden_dim, latent_dim, condition_dim).to(device)
 optimizer = optim.Adam(model.parameters(), lr=1e-5)
-num_epochs = 15000
+num_epochs = 100
 num_trials = 1
 
 # 모델 학습
@@ -237,7 +275,7 @@ for trial in range(num_trials):
 print("모델 학습 완료!")
 
 # 모델 저장
-torch.save(model.state_dict(), "./model/cvae_model_epoch15000_trial1.pth")
+torch.save(model.state_dict(), "./model/cvae_model_normal_to_anomaly_detection.pth")
 
 # 예측 및 결과 시각화
 model.eval()
@@ -248,7 +286,10 @@ with torch.no_grad():
 
     sample = sample.squeeze().cpu().numpy().transpose(1, 0)  # 원래 데이터 형태로 복원
     reconstructed = reconstructed.squeeze().cpu().numpy().transpose(1, 0)  # 원래 데이터 형태로 복원
-
+    # 역정규화 추가
+    sample = MinMaxScaler().inverse_transform(sample)
+    reconstructed = MinMaxScaler().inverse_transform(reconstructed)
+    
 for i in range(len(features)):
     plt.figure(figsize=(12, 6))
     plt.plot(sample[:, i], label="Original")
@@ -259,4 +300,4 @@ for i in range(len(features)):
     plt.title("Original vs Reconstructed")
     if features[i] == 'DV/DT':
         features[i] = 'DV_DT'
-    plt.savefig('./figure/epoch15000_trial1/' + str(features[i]) + '.png', dpi=600)
+    plt.savefig('./figure/CVAE_single/normal_to_anomaly/' + str(features[i]) + '.png', dpi=600)
