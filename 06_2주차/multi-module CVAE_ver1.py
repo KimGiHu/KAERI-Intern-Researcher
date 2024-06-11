@@ -159,8 +159,9 @@ class CVAE(nn.Module):
 # 손실 함수 정의
 def loss_function(x_recon, x, mu, logvar):
     BCE = nn.functional.mse_loss(x_recon, x, reduction='sum')
-    KLD = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
-    return BCE + 1*KLD
+    KLD = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())# see Appendix B from VAE paper:
+                                                                 # Kingma and Welling. Auto-Encoding Variational Bayes. ICLR, 2014
+    return BCE + KLD
 
 # 고유 파형들 정의
 features=['A+IGBT-I', 'A+*IGBT-I', 'B+IGBT-I', 'B+*IGBT-I', 'C+IGBT-I', 
@@ -203,7 +204,6 @@ labels2 = create_labels(Y2, system2)
 labels3 = create_labels(Y3, system3)
 labels4 = create_labels(Y4, system4)
 
-
 # 배열 X,Y의 정상 및 오류 데이터들을 분리함
 fault_indices_RFQ, normal_indices_RFQ = np.where(Y1[:,1] == 'Fault')[0], np.where(Y1[:,1] == 'Run')[0] 
 fault_indices_DTL, normal_indices_DTL = np.where(Y2[:,1] == 'Fault')[0], np.where(Y2[:,1] == 'Run')[0]
@@ -242,13 +242,13 @@ dataloader1 = DataLoader(dataset1, batch_size=16, shuffle=True)
 # GPU 장치 설정
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-# 모델 및 학습 설정
+# 모델 및 학습파라미터 설정
 input_dim = 14
 hidden_dim = 4500
 latent_dim = 512
-condition_dim = 4
+condition_dim = 4 # RFQ(0), DTL(1), CCL(2), SCL(3) 총 4가지의 시스템 모듈 이름을 조건으로 사용.
 
-num_epochs = 100
+num_epochs = 500 # epoch : 100(deafault) -> 500
 num_trials = 1
 
 # 모델 학습
@@ -276,26 +276,21 @@ for trial in range(num_trials):
 print("모델 학습 완료!")
 
 # 모델 저장
-torch.save(model.state_dict(), "./model/cvae_model_normal_to_anomaly_detection.pth")
+torch.save(model.state_dict(), "./model/mutli-module_based_cvae_epoch500.pth")
 
-# 데이터 생성 : A-Flux Low Fault만을 수집
-a_FLUX_FAULT_INDICES = np.where(Yanomaly_RFQ[:, 2] == 'A FLUX Low Fault')[0]
-
-
-# data_test = Xnormal_RFQ[-1:,:,:] # 정상 신호
-data_test = Xanomaly_RFQ[a_FLUX_FAULT_INDICES[-1:],:,:] # 오류 신호
-data_test = sclaer.fit_transform(data_test.reshape(-1, data_test.shape[-1])).reshape(data_test.shape)
-data_test = data_test.transpose(0,2,1)
-data_test = torch.tensor(data_test, dtype=torch.float32)
-labels_one_hot = torch.tensor(labels_one_hot, dtype=torch.float32)
+# 테스트 데이터 설정 : 정상신호
+data_test_normal = Xnormal_RFQ[-1:,:,:] # 정상 신호
+data_test_normal = sclaer.fit_transform(data_test_normal.reshape(-1, data_test_normal.shape[-1])).reshape(data_test_normal.shape)
+data_test_normal = data_test_normal.transpose(0,2,1)
+data_test_normal = torch.tensor(data_test_normal, dtype=torch.float32)
 
 # 학습한 모델 불러오기
-model.load_state_dict(torch.load('./model/multi_module_cvae_model_normal_to_anomaly_detection.pth'))
+model.load_state_dict(torch.load('./model/mutli-module_based_cvae_epoch500.pth'))
 
 # 예측 및 결과 시각화
 model.eval()
 with torch.no_grad():
-    sample = data_test[0].unsqueeze(0).to(device)
+    sample = data_test_normal[0].unsqueeze(0).to(device)
     condition = labels_one_hot[0].unsqueeze(0).to(device)
     reconstructed, _, _ = model(sample, condition)
 
@@ -305,6 +300,7 @@ with torch.no_grad():
     sample = sclaer.inverse_transform(sample)
     reconstructed = sclaer.inverse_transform(reconstructed)
 
+# 14개의 unique waveform을 figure로 저장
 for i in range(len(features)):
     plt.figure(figsize=(12, 6))
     plt.plot(sample[:, i], label="Original")
@@ -315,4 +311,41 @@ for i in range(len(features)):
     plt.title("Original vs Reconstructed")
     if features[i] == 'DV/DT':
         features[i] = 'DV_DT'
-    plt.savefig('./figure/CVAE_multi/normal_to_anomaly/' + str(features[i]) + '.png', dpi=600)
+    plt.savefig('./figure/CVAE_multi/normal_to_normal_epoch500/' + str(features[i]) + '.png', dpi=600)
+
+# # 데이터 생성 : A-Flux Low Fault만을 수집
+# a_FLUX_FAULT_INDICES = np.where(Yanomaly_RFQ[:, 2] == 'A FLUX Low Fault')[0]
+# data_test_anomaly = Xanomaly_RFQ[a_FLUX_FAULT_INDICES[-1:],:,:] # 오류 신호
+# data_test_anomaly = sclaer.fit_transform(data_test_anomaly.reshape(-1, data_test_anomaly.shape[-1])).reshape(data_test_anomaly.shape)
+# data_test_anomaly = data_test_anomaly.transpose(0,2,1)
+# data_test_anomaly = torch.tensor(data_test_anomaly, dtype=torch.float32)
+# labels_one_hot = torch.tensor(labels_one_hot, dtype=torch.float32)
+
+# # 학습한 모델 불러오기
+# model.load_state_dict(torch.load('./model/mutli-module_based_cvae_epoch500.pth'))
+
+# # 예측 및 결과 시각화
+# model.eval()
+# with torch.no_grad():
+#     sample = data_test_anomaly[0].unsqueeze(0).to(device)
+#     condition = labels_one_hot[0].unsqueeze(0).to(device)
+#     reconstructed, _, _ = model(sample, condition)
+
+#     sample = sample.squeeze().cpu().numpy().transpose(1, 0)  # 원래 데이터 형태로 복원
+#     reconstructed = reconstructed.squeeze().cpu().numpy().transpose(1, 0)  # 원래 데이터 형태로 복원
+#     # 역정규화 추가
+#     sample = sclaer.inverse_transform(sample)
+#     reconstructed = sclaer.inverse_transform(reconstructed)
+
+# # 14개의 unique waveform을 figure로 저장
+# for i in range(len(features)):
+#     plt.figure(figsize=(12, 6))
+#     plt.plot(sample[:, i], label="Original")
+#     plt.plot(reconstructed[:, i], label="Reconstructed")
+#     plt.legend()
+#     plt.xlabel("Time (s)")
+#     plt.ylabel(features[i])
+#     plt.title("Original vs Reconstructed")
+#     if features[i] == 'DV/DT':
+#         features[i] = 'DV_DT'
+#     plt.savefig('./figure/CVAE_multi/normal_to_anomaly_epoch500/' + str(features[i]) + '.png', dpi=600)
