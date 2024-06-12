@@ -267,7 +267,7 @@ num_trials = 1
 
 
 # 학습한 모델 불러오기
-model.load_state_dict(torch.load('./model/mutli-module_based_cvae_baseline_best1.pth'))
+model.load_state_dict(torch.load('./model/mutli-module_based_cvae_baseline.pth'))
 
 # 예측 및 결과 시각화
 model.eval()
@@ -290,6 +290,15 @@ for i in range(len(features)):
     plt.xlabel("Time (s)")
     plt.ylabel(features[i])
     plt.title("Original vs Reconstructed")
+    
+    # 특수문자들 저장할때 오류나서 제대로 되지 않기에, 다음 값들로 변환함.
+    # */ >> _
+    if features[i] == 'A+*IGBT-I':
+        features[i] = 'A+_IGBT-I'
+    if features[i] == 'B+*IGBT-I':
+        features[i] = 'B+_IGBT-I'
+    if features[i] == 'C+*IGBT-I':
+        features[i] = 'C+_IGBT-I'
     if features[i] == 'DV/DT':
         features[i] = 'DV_DT'
     plt.savefig('./figure/CVAE_multi/normal_to_abnormal_test/' + str(features[i]) + '.png', dpi=600)
