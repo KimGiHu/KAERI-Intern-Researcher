@@ -7,22 +7,6 @@ from torch.utils.data import DataLoader, Dataset
 from sklearn.preprocessing import MinMaxScaler
 import random
 
-# # 시드 값 설정
-# seed = 42
-
-# # 기본 시드 고정
-# random.seed(seed)
-# np.random.seed(seed)
-# torch.manual_seed(seed)
-
-# # CUDA 사용 시 추가 설정
-# if torch.cuda.is_available():
-#     torch.cuda.manual_seed(seed)
-#     torch.cuda.manual_seed_all(seed)  # 멀티-GPU 사용 시
-#     # CuDNN 결정론적 및 비결정론적 동작 설정
-#     torch.backends.cudnn.deterministic = True
-#     torch.backends.cudnn.benchmark = False
-
 # 데이터 준비
 class CustomDataset(Dataset):
     def __init__(self, data, labels):
@@ -62,11 +46,12 @@ class Encoder(nn.Module):
             return seq_len
 
         self.seq_len = calc_seq_len(seq_len)
-        self.fc = nn.Linear(128 * self.seq_len + condition_dim, 512)
-        self.fc_mu = nn.Linear(512, latent_dim)
-        self.fc_logvar = nn.Linear(512, latent_dim)
+        # self.fc = nn.Linear(128 * self.seq_len + condition_dim, 512)
+        self.fc = nn.Linear(128 * self.seq_len, 512)
+        self.fc_mu = nn.Linear(512 + condition_dim, latent_dim)
+        self.fc_logvar = nn.Linear(512 + condition_dim, latent_dim)
         self.dropout = nn.Dropout(p=dropout_prob)
-        self.bn0 = nn.BatchNorm1d(num_features=512)
+        self.bn0 = nn.BatchNorm1d(num_features=(512 + condition_dim))
 
     def forward(self, x, c):
         x = self.conv1(x)
@@ -90,13 +75,10 @@ class Encoder(nn.Module):
         
         # Flatten 효과
         x = x.view(x.size(0), -1) 
+        x = self.fc(x)
 
-        # Concatenate multi-module    
-        # print(f"Shape of x after fc: {x.shape}, Shape of c: {c.shape}")  # Debug print
         x = torch.cat([x, c], dim=-1) 
         
-        # print(f"Shape of x after fc: {x.shape}")  # Debug print
-        x = self.fc(x)
         x = self.bn0(x)
         x = torch.relu(x)
         
@@ -175,16 +157,11 @@ def loss_function(x_recon, x, mu, logvar):
 
     return BCE + 1.0*KLD
 
-# 고유 파형들 정의
-features=['A+IGBT-I', 'A+*IGBT-I', 'B+IGBT-I', 'B+*IGBT-I', 'C+IGBT-I', 
-          'C+*IGBT-I', 'A-FLUX', 'B-FLUX', 'C-FLUX', 'MOD-V', 'MOD-I', 'CB-I', 
-          'CB-V', 'DV/DT']
-feature_index=6  # A-flux 고유파형선택
-
-system1='RFQ'     # pick a system to load and plot. Choose RFQ
-system2='DTL'     # pick a system to load and plot. Choose DTL
-system3='CCL'     # pick a system to load and plot. Choose CCL
-system4='SCL'     # pick a system to load and plot. Choose SCL
+# 모듈별 변수들 정의
+system1='RFQ'
+system2='DTL'
+system3='CCL'
+system4='SCL'
 
 # 데이터 로드 및 라벨 인코딩
 def load_data(system):
@@ -262,6 +239,7 @@ condition_dim = 4 # RFQ(0), DTL(1), CCL(2), SCL(3) 총 4가지의 시스템 모�
 
 num_epochs = 100 
 num_trials = 150
+tmp = 100000000
 
 # 모델 학습
 for trial in range(num_trials):
@@ -284,16 +262,17 @@ for trial in range(num_trials):
             total_loss += loss.item()
             avg_loss = total_loss / (len(dataloader1)+1)
         total_loss_per_trial += avg_loss
-        if epoch == 99:
-            tmp = avg_loss
         print(f'Trial {trial + 1}/{num_trials}, Epoch {epoch + 1}/{num_epochs}, Loss: {avg_loss:.4f}')
     if avg_loss <= tmp :
         # 모델 저장
         tmp = avg_loss
         torch.save(model.state_dict(), "./model/mutli-module_based_cvae_best1.pth")
+        print("최고 모델 저장 완료!")
         
     print(f'Trial {trial + 1}/{num_trials} completed with total average loss: {total_loss_per_trial / num_epochs:.4f}')
 print("모델 학습 완료!")
 
 # 모델 저장
 torch.save(model.state_dict(), "./model/mutli-module_based_cvae_baseline_last1.pth")
+
+print("모델 백업본 저장 완료!")
