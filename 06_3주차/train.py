@@ -84,6 +84,7 @@ class Encoder(nn.Module):
         
         x = self.bn0(x)
         x = torch.relu(x)
+        x = self.dropout(x)
         
         mu = self.fc_mu(x)
         logvar = self.fc_logvar(x)
