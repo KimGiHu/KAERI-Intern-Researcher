@@ -213,24 +213,47 @@ Ynormal_DTL, Yanomaly_DTL = Y2[normal_indices_DTL,:], Y2[fault_indices_DTL,:]
 Ynormal_CCL, Yanomaly_CCL = Y3[normal_indices_CCL,:], Y3[fault_indices_CCL,:]
 Ynormal_SCL, Yanomaly_SCL = Y4[normal_indices_SCL,:], Y4[fault_indices_SCL,:]
 
-Xnormal_concat = np.concatenate( (Xnormal_RFQ, Xnormal_DTL, Xnormal_CCL, Xnormal_SCL), axis=0 )
-Xanomaly_concat = np.concatenate( (Xanomaly_RFQ, Xanomaly_DTL, Xanomaly_CCL, Xanomaly_SCL), axis=0 )
-
 # 원-핫 인코딩
 labels_concat = np.concatenate((labels1[normal_indices_RFQ], labels2[normal_indices_DTL], labels3[normal_indices_CCL], labels4[normal_indices_SCL]), axis=0)
 labels_one_hot = np.eye(len(system_indices))[labels_concat]
 
 # Min-Max 스케일러 인스턴스 초기화
 scaler_RFQ = MinMaxScaler()
+scaler_DTL = MinMaxScaler()
+scaler_CCL = MinMaxScaler()
+scaler_SCL = MinMaxScaler()
+
 Xnormal_RFQ_norm = scaler_RFQ.fit_transform(np.array(Xnormal_RFQ[:524,:,:]).reshape(-1, Xnormal_RFQ.shape[-1])).reshape(np.array(Xnormal_RFQ[:524,:,:]).shape)
+Xnormal_DTL_norm = scaler_DTL.fit_transform(np.array(Xnormal_DTL[:524,:,:]).reshape(-1, Xnormal_DTL.shape[-1])).reshape(np.array(Xnormal_DTL[:524,:,:]).shape)
+Xnormal_CCL_norm = scaler_CCL.fit_transform(np.array(Xnormal_CCL[:524,:,:]).reshape(-1, Xnormal_CCL.shape[-1])).reshape(np.array(Xnormal_CCL[:524,:,:]).shape)
+Xnormal_SCL_norm = scaler_SCL.fit_transform(np.array(Xnormal_SCL[:524,:,:]).reshape(-1, Xnormal_SCL.shape[-1])).reshape(np.array(Xnormal_SCL[:524,:,:]).shape)
 
 # 데이터 생성 : A-Flux Low Fault만을 수집
-a_FLUX_FAULT_INDICES = np.where(Yanomaly_RFQ[:, 2] == 'A FLUX Low Fault')[0]
+a_FLUX_FAULT_INDICES_RFQ = np.where(Yanomaly_RFQ[:, 2] == 'A FLUX Low Fault')[0]
+a_FLUX_FAULT_INDICES_DTL = np.where(Yanomaly_DTL[:, 2] == 'A FLUX Low Fault')[0]
+a_FLUX_FAULT_INDICES_CCL = np.where(Yanomaly_CCL[:, 2] == 'A FLUX Low Fault')[0]
+a_FLUX_FAULT_INDICES_SCL = np.where(Yanomaly_SCL[:, 2] == 'A FLUX Low Fault')[0]
 
 # 총 6개의 A-Flux Fault 중에서 마지막 인덱스 데이터를 테스트 셋으로 사용함.
+
+# RFQ 정상/비정상 신호
 # data_test = Xnormal_RFQ[525:526,:,:]
-data_test = Xanomaly_RFQ[a_FLUX_FAULT_INDICES[0:1],:,:]
-data_test = scaler_RFQ.transform(data_test.reshape(-1, data_test.shape[-1])).reshape(data_test.shape)
+# data_test = Xanomaly_RFQ[a_FLUX_FAULT_INDICES_RFQ[0:1],:,:]
+
+# data_test = Xnormal_DTL[525:526,:,:]
+data_test = Xanomaly_DTL[0:1,:,:]
+
+# data_test = Xnormal_CCL[525:526,:,:]
+# data_test = Xanomaly_DTL[0:1,:,:]
+
+# data_test = Xnormal_SCL[525:526,:,:]
+# data_test = Xanomaly_SCL[0:1,:,:]
+
+# data_test = scaler_RFQ.transform(data_test.reshape(-1, data_test.shape[-1])).reshape(data_test.shape)
+data_test = scaler_DTL.transform(data_test.reshape(-1, data_test.shape[-1])).reshape(data_test.shape)
+# data_test = scaler_CCL.transform(data_test.reshape(-1, data_test.shape[-1])).reshape(data_test.shape)
+# data_test = scaler_SCL.transform(data_test.reshape(-1, data_test.shape[-1])).reshape(data_test.shape)
+
 data_test = data_test.transpose(0,2,1)
 data_test = torch.tensor(data_test, dtype=torch.float32)
 labels_one_hot = torch.tensor(labels_one_hot, dtype=torch.float32)
@@ -257,18 +280,32 @@ model.load_state_dict(torch.load('./model/mutli-module_based_cvae_best_ver4.pth'
 # 예측 및 결과 시각화
 model.eval()
 with torch.no_grad():
+    print("plot the shape of test data and label_test")
+    print(data_test[0])
+    print(labels_one_hot[0])
     sample = data_test[0].unsqueeze(0).to(device)
     condition = labels_one_hot[0].unsqueeze(0).to(device)
     reconstructed, _, _ = model(sample, condition)
 
+    print("after inference")
     print(sample.transpose(1,0))
     print(reconstructed.transpose(1,0))
     sample = sample.squeeze().cpu().numpy().transpose(1, 0)  # 원래 데이터 형태로 복원
     reconstructed = reconstructed.squeeze().cpu().numpy().transpose(1, 0)  # 원래 데이터 형태로 복원
     
     # 역정규화 추가
-    sample = scaler_RFQ.inverse_transform(sample)
-    reconstructed = scaler_RFQ.inverse_transform(reconstructed)
+    # sample = scaler_RFQ.inverse_transform(sample)
+    # reconstructed = scaler_RFQ.inverse_transform(reconstructed)
+
+    sample = scaler_DTL.inverse_transform(sample)
+    reconstructed = scaler_DTL.inverse_transform(reconstructed)
+    
+    # sample = scaler_CCL.inverse_transform(sample)
+    # reconstructed = scaler_CCL.inverse_transform(reconstructed)
+    
+    # sample = scaler_SCL.inverse_transform(sample)
+    # reconstructed = scaler_SCL.inverse_transform(reconstructed)
+    
 
 for i in range(len(features)):
     plt.figure(figsize=(12, 6))
@@ -290,4 +327,4 @@ for i in range(len(features)):
     if features[i] == 'DV/DT':
         features[i] = 'DV_DT'
     
-    plt.savefig('./figure/CVAE_multi/normal_to_abnormal_ver4/' + str(features[i]) + '.png', dpi=600)
+    plt.savefig('./figure/ver4/DTL/abnormal/' + str(features[i]) + '.png', dpi=600)
