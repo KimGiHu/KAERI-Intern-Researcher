@@ -1,5 +1,10 @@
 Adaptive Learning 기법을 적용한 실험결과 정리
+- - - - - - -
+0. 기존 논문의 모델에 대한 unknown signal의 테스트 결과.
 
+![Normal vs  Fault ver pretrain](https://github.com/user-attachments/assets/726b2a0c-67ad-4525-ae84-6917c25e4ebb)
+
+- - - - - - -
 1. Adaptive Model 학습에 사용한 정상신호와 사용하지 않은 비정상 신호 테스트. 
 (정상신호 적응형 모델로 정상신호와 비정상신호를 테스트함.)
 
