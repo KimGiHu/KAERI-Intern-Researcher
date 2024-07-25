@@ -17,4 +17,4 @@
 - - - - - - - -
 3. 변경한 식별네트워크2 (학습률  1e-3)
 
-![Total Normal vs  Fault _learning_rate1e-3](https://github.com/user-attachments/assets/46ac87db-6ab9-4cc7-b756-d6f935b1b923)
+![Total Normal vs  Fault _ test](https://github.com/user-attachments/assets/d38ed1e9-281d-4621-b146-39d8b9149f42)
