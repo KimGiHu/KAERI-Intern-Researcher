@@ -7,6 +7,8 @@
 - - - - - - - -
 1. 기존 식별네트워크
 
+![learning rate 1e-5 default model Normal vs  Fault ](https://github.com/user-attachments/assets/fdb1a0a4-d9f3-4bbe-b395-36a2d13c8d7a)
+
 - - - - - - - -
 2. 변경한 식별네트워크 (학습률 : 1e-4)
 
