@@ -1,0 +1,83 @@
+True
+------------ Options -------------
+anormly_ratio : 1.0
+batch_size : 256
+data_path : dataset/PSM
+dataset : PSM
+input_c : 25
+k : 3
+lr : 0.0001
+mode : train
+model_save_path : checkpoints
+num_epochs : 3
+output_c : 25
+pretrained_model : None
+win_size : 100
+-------------- End ----------------
+test: (87841, 25)
+train: (132481, 25)
+test: (87841, 25)
+train: (132481, 25)
+test: (87841, 25)
+train: (132481, 25)
+test: (87841, 25)
+train: (132481, 25)
+======================TRAIN MODE======================
+	speed: 0.1452s/iter; left time: 211.227959s
+	speed: 0.1443s/iter; left time: 195.517449s
+	speed: 0.1445s/iter; left time: 181.380199s
+	speed: 0.1445s/iter; left time: 166.943367s
+	speed: 0.1445s/iter; left time: 152.483515s
+Epoch : 1 cost time: 74.93553328514099
+Epoch: 1, Steps: 518 | Train Loss: -44.9404466 Vali Loss : -19.9851179
+Validation loss decreased (inf --> -19.985118).  Saving model ...
+Updating learning rate to 0.0001
+	speed: 0.3314s/iter; left time: 310.558867s
+	speed: 0.1447s/iter; left time: 121.135873s
+	speed: 0.1449s/iter; left time: 106.771873s
+	speed: 0.1449s/iter; left time: 92.291565s
+	speed: 0.1449s/iter; left time: 77.797734s
+Epoch : 2 cost time: 74.87998223304749
+Epoch: 2, Steps: 518 | Train Loss: -48.2296367 Vali Loss : -20.2310867
+EarlyStopping counter: 1 out of 3
+Updating learning rate to 5e-05
+	speed: 0.3309s/iter; left time: 138.654733s
+	speed: 0.1449s/iter; left time: 46.216584s
+	speed: 0.1449s/iter; left time: 31.723057s
+	speed: 0.1448s/iter; left time: 17.235712s
+	speed: 0.1448s/iter; left time: 2.751955s
+Epoch : 3 cost time: 74.91124773025513
+Epoch: 3, Steps: 518 | Train Loss: -48.6265602 Vali Loss : -20.3885486
+EarlyStopping counter: 2 out of 3
+Updating learning rate to 2.5e-05
+True
+------------ Options -------------
+anormly_ratio : 1.0
+batch_size : 256
+data_path : dataset/PSM
+dataset : PSM
+input_c : 25
+k : 3
+lr : 0.0001
+mode : test
+model_save_path : checkpoints
+num_epochs : 10
+output_c : 25
+pretrained_model : 20
+win_size : 100
+-------------- End ----------------
+test: (87841, 25)
+train: (132481, 25)
+test: (87841, 25)
+train: (132481, 25)
+test: (87841, 25)
+train: (132481, 25)
+test: (87841, 25)
+train: (132481, 25)
+======================TEST MODE======================
+Threshold : 0.003079262787941833
+pred :    (87800,)
+gt :      (87800,)
+pred :    (87800,)
+gt :      (87800,)
+Accuracy : 0.9847, Precision : 0.9613, Recall : : 0.9843, F1-score : 0.9727 
