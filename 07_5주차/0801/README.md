@@ -1,4 +1,4 @@
-트랜스포머의 핵심 매커니즘 : 어텐션(Attention) 메커니즘 리뷰.
+트랜스포머의 핵심 : 어텐션(Attention) 메커니즘 리뷰.
 
 1. 트랜스포머 : Attentions is All you Need .. 어텐션 매커니즘의 등장 배경
 
