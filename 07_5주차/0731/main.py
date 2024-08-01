@@ -10,11 +10,12 @@ def str2bool(v):
     return v.lower() in ('true')
 
 def main(config):
-    cudnn.benchmark = True
+    cudnn.benchmark = True # pytorch에서 cuDNN 라이브러리의 동적방식 할당을 최적화함. >> 1. 변동하는 입력크기의 적절한 알고리즘 도입. 2. 컨볼루션 연산 최적화.
+    # 학습한 모델의 저장경로 생성.
     if(not os.path.exists(config.model_save_path)):
         mkdir(config.model_save_path)
-    solver = Solver(vars(config))
-
+    solver = Solver(vars(config)) # vars : 
+    
     if config.mode == 'train':
         solver.train()
     elif config.mode == 'test':
