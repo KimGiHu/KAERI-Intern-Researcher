@@ -1,13 +1,13 @@
 t-SNE로 고유파형별 실험 plot한 결과.
 
-<IGBT-A>
+<IGBT-A, 1>
 ![IGBT A tsne_latent_space](https://github.com/user-attachments/assets/4f9d2b79-fcb5-4f1c-9868-6d99a7a87166)
 
 <IGBT-A*>
 
 ![IGBT A star tsne_latent_space](https://github.com/user-attachments/assets/12175881-8415-44e3-8419-3f81371e275f)
 
-<IGBT-B>
+<IGBT-B, 2>
   
 ![IGBT B tsne_latent_space](https://github.com/user-attachments/assets/82e39e2e-6d14-46ab-a137-d8512dae9298)
 
@@ -15,7 +15,7 @@ t-SNE로 고유파형별 실험 plot한 결과.
 
 ![IGBT B star tsne_latent_space](https://github.com/user-attachments/assets/c36bc9e4-945f-4590-a020-c2d52af14f21)
 
-<IGBT-C>
+<IGBT-C, 3>
   
 ![IGBT C tsne_latent_space](https://github.com/user-attachments/assets/fc1969a3-78cf-48bf-8a07-f1fd0a7a89a7)
 
