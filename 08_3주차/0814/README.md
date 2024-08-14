@@ -18,10 +18,9 @@
 
 - t-SNE를 사용하여 시각화된 잠재공간에서 Normal과 Fault 데이터 간의 분리가 얼마나 잘 되는지를 평가
 - 평가 지표:
-  
-      - 클러스터링 지표: 예를 들어, Silhouette Score, Davies-Bouldin Index, 혹은 Adjusted Rand Index (ARI) 같은 클러스터링 품질 평가 지표를 사용
-      - 분포 차이: 잠재공간의 밀도 차이를 비교하기 위해 Kullback-Leibler Divergence (KL Divergence) 같은 지표를 사용
-      - 시각적 평가: 잠재공간에서의 Normal과 Fault 데이터가 얼마나 잘 분리되었는지를 시각적으로 확인
+  - 클러스터링 지표: 예를 들어, Silhouette Score, Davies-Bouldin Index, 혹은 Adjusted Rand Index (ARI) 같은 클러스터링 품질 평가 지표를 사용
+  - 분포 차이: 잠재공간의 밀도 차이를 비교하기 위해 Kullback-Leibler Divergence (KL Divergence) 같은 지표를 사용
+  - 시각적 평가: 잠재공간에서의 Normal과 Fault 데이터가 얼마나 잘 분리되었는지를 시각적으로 확인
   
 3. **이상 탐지 성능 (Anomaly Detection Performance)**:
 
