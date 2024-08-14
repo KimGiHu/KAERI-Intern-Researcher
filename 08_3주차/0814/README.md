@@ -27,14 +27,12 @@
 
 - 두 모델이 정상과 비정상 신호를 얼마나 잘 구분하는지를 평가하기 위해 ROC-AUC (Receiver Operating Characteristic - Area  Under the Curve)와 같은 지표를 사용
 - 평가 지표 :
-
-        - ROC Curve와 AUC 값 비교
-        - Precision-Recall Curve와 F1 Score를 비교할 수 있습니다.
+    - ROC Curve와 AUC 값 비교
+    - Precision-Recall Curve와 F1 Score를 비교할 수 있습니다.
 
 4. **모델의 복잡도 (Model Complexity)**:
 
 - 모델의 파라미터 수나 계산 복잡도에 따라 실제 사용에서의 효율성을 평가
 - 평가 지표:
-  
-        - 파라미터 수 비교
-        - 추론 시간 (Inference Time) 비교
+  - 파라미터 수 비교
+  - 추론 시간 (Inference Time) 비교
