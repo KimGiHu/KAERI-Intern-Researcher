@@ -27,7 +27,7 @@
 
 - 두 모델이 정상과 비정상 신호를 얼마나 잘 구분하는지를 평가하기 위해 ROC-AUC (Receiver Operating Characteristic - Area  Under the Curve)와 같은 지표를 사용
 - 평가 지표 :
-  
+
         - ROC Curve와 AUC 값 비교
         - Precision-Recall Curve와 F1 Score를 비교할 수 있습니다.
 
