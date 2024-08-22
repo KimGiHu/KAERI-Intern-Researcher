@@ -11,7 +11,6 @@ Proposed Fault Loss - Mean:  6.4978726e-06  Std:  5.4165002e-06
 | Predicted Negative  |  Predicted Positive
 |------|---|---|
 Actual Negative   |      TN            |         FP
-
 Actual Positive   |      FN            |         TP
 
 
