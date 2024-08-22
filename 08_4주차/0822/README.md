@@ -47,3 +47,32 @@ Proposed model Confusion matrix | Predicted Negative  |  Predicted Positive
 |:------:|:---:|:---:|
 Actual Negative   |     1371            |         27
 Actual Positive   |     1124            |         579
+
+
+## 3. Confusion matrix of pretrained model & proposed mdoel using activation function "ReLU"
+
+### 3-1. Pretrained model
+
+Precision: 0.7960
+
+Recall: 0.4627
+
+F1-score: 0.5852
+
+Pretrained model Confusion matrix | Predicted Negative  |  Predicted Positive
+|:------:|:---:|:---:|
+Actual Negative   |     1196            |         202
+Actual Positive   |     915            |         788
+
+### 3-2. Proposed model
+
+Precision: 0.6102
+
+Recall: 0.7428
+
+F1-score: 0.6700
+
+Proposed model Confusion matrix | Predicted Negative  |  Predicted Positive
+|:------:|:---:|:---:|
+Actual Negative   |     590            |         808
+Actual Positive   |     438            |         1265
