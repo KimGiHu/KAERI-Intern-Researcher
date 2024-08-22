@@ -10,7 +10,7 @@ Proposed Normal Loss |  3.696645e-06  |  1.963688e-06
 Proposed Fault Loss |  6.4978726e-06  |  5.4165002e-06
 
 - - - - -
-## 2. Confusion matrix of pretrained model & proposed mdoel
+## 2. Confusion matrix of pretrained model & proposed mdoel using activation function "GELU"
 Confusion matrix | Predicted Negative  |  Predicted Positive
 |:------:|:---:|:---:|
 Actual Negative   |      TN            |         FP
