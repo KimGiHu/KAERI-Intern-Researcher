@@ -13,6 +13,8 @@ Confusion matrix | Predicted Negative  |  Predicted Positive
 Actual Negative   |      TN            |         FP
 Actual Positive   |      FN            |         TP
 
+**Negative : Normal Signal
+Positive : Abnormal Signal**
 
 ### Pretrained model
 ROC Curve에서 정상신호와 비정산신호를 구분하는 최적의 값 : 4.0755016925686505e-06
