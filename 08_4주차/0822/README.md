@@ -9,7 +9,7 @@ Proposed model | Mean | Std
 Proposed Normal Loss |  3.696645e-06  |  1.963688e-06
 Proposed Fault Loss |  6.4978726e-06  |  5.4165002e-06
 
-
+- - - - -
 ## 2. Confusion matrix of pretrained model & proposed mdoel
 Confusion matrix | Predicted Negative  |  Predicted Positive
 |:------:|:---:|:---:|
@@ -48,7 +48,7 @@ Proposed model Confusion matrix | Predicted Negative  |  Predicted Positive
 Actual Negative   |     1371            |         27
 Actual Positive   |     1124            |         579
 
-
+- - - - -
 ## 3. Confusion matrix of pretrained model & proposed mdoel using activation function "ReLU"
 
 ### 3-1. Pretrained model
