@@ -51,8 +51,6 @@ Actual Positive   |     1124            |         579
 - - - - -
 ## 3. Confusion matrix of pretrained model & proposed mdoel using activation function "ReLU"
 
-### 3-1. Pretrained model
-
 Pretrained Normal Loss - Mean:  3.4726115e-06  Std:  8.138147e-07
 
 Pretrained Fault Loss - Mean:  5.8931087e-06  Std:  4.142563e-06
@@ -60,6 +58,8 @@ Pretrained Fault Loss - Mean:  5.8931087e-06  Std:  4.142563e-06
 Proposed Normal Loss - Mean:  2.7136384e-05  Std:  2.2543561e-05
 
 Proposed Fault Loss - Mean:  3.153465e-05  Std:  2.2213599e-05
+
+### 3-1. Pretrained model
 
 Precision: 0.7960
 
