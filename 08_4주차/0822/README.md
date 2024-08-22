@@ -1,10 +1,10 @@
 ## 1. Mean and Standara from pretrained and proposed model
- | Mean | Std
+Pretrained model | Mean | Std
 |------|---|---|
-Pretrained Normal Loss | 3.4629488e-06  | 8.1137483e-07
-Pretrained Fault Loss | 5.860476e-06  | 4.138254e-06
+Normal Loss | 3.4629488e-06  | 8.1137483e-07
+Fault Loss | 5.860476e-06  | 4.138254e-06
 
-| Mean | Std
+Proposed model | Mean | Std
 |------|---|---|
 Proposed Normal Loss |  3.696645e-06  |  1.963688e-06
 Proposed Fault Loss |  6.4978726e-06  |  5.4165002e-06
