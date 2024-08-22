@@ -23,7 +23,11 @@ Recall: 0.4592
 
 F1-score: 0.5827
 
-Confusion Matrix:
+Pretrained model Confusion matrix | Predicted Negative  |  Predicted Positive
+|------|---|---|
+Actual Negative   |     1199            |         199
+Actual Positive   |     921            |         782
+
 
 [[1199  199]
  [ 921  782]]
