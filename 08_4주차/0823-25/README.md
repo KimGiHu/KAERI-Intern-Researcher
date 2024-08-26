@@ -34,13 +34,8 @@ Actual Positive   |      118            |         1585
 - Confusion Matrix:
   DA model | Predicted Negative  |  Predicted Positive
 |:------:|:---:|:---:|
-Actual Negative   |      1327            |         71
-Actual Positive   |      118            |         1585
-
-[[1165  233]
- [ 606 1097]]
-
-
+Actual Negative   |      1165            |         233
+Actual Positive   |      606            |         1097
 
 - - - - - - - -
 실험한 내용들을 다음과 같은 분류항목들을 정리하고자 한다.
