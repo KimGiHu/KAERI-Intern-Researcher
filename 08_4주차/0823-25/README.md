@@ -21,7 +21,7 @@ Fault signal Loss - Mean:  0.04257906  Std:  0.017675094
 
 - Confusion Matrix:
   
-  Tunning model | Predicted Negative  |  Predicted Positive
+Tunning model | Predicted Negative  |  Predicted Positive
 |:------:|:---:|:---:|
 Actual Negative   |      1327            |         71
 Actual Positive   |      118            |         1585
@@ -34,7 +34,7 @@ Actual Positive   |      118            |         1585
 
 - Confusion Matrix:
   
-  DA model | Predicted Negative  |  Predicted Positive
+ DA model | Predicted Negative  |  Predicted Positive
 |:------:|:---:|:---:|
 Actual Negative   |      1165            |         233
 Actual Positive   |      606            |         1097
