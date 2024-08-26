@@ -20,6 +20,7 @@ Fault signal Loss - Mean:  0.04257906  Std:  0.017675094
 - F1-score: 0.9437
 
 - Confusion Matrix:
+  
   Tunning model | Predicted Negative  |  Predicted Positive
 |:------:|:---:|:---:|
 Actual Negative   |      1327            |         71
@@ -32,6 +33,7 @@ Actual Positive   |      118            |         1585
 - F1-score: 0.7234
 
 - Confusion Matrix:
+  
   DA model | Predicted Negative  |  Predicted Positive
 |:------:|:---:|:---:|
 Actual Negative   |      1165            |         233
