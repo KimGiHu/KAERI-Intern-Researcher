@@ -37,7 +37,26 @@ Confusion Matrix:
 
 MSE Loss 함수를 사용할 때, reduction 기능을 'sum'으로 설정하고 학습한 경우
 
+Baseline Normal Loss - Mean:  0.0031117005  Std:  0.0019744362
 
+Baseline Fault Loss - Mean:  0.017567148  Std:  0.013441928
+
+ROC Curve에서 정상신호와 비정산신호를 구분하는 최적의 값 : 0.004985465202480555
+
+Precision: 0.8955
+
+Recall: 0.9865
+
+F1-score: 0.9388
+
+Confusion Matrix:
+
+
+[[1202  196]
+
+ [  23 1680]]
+
+![baseline_reduction_sum Normal vs  Fault ROC Curve](https://github.com/user-attachments/assets/5744835a-0871-44a4-9294-16235ca40bd7)
 
 ### Proposed Model
 
