@@ -4,16 +4,16 @@
 ![activation gelu pretrained Normal vs  Fault ROC Curve](https://github.com/user-attachments/assets/4d01cc2a-fbcc-40ca-871a-07d1a0933ed6)
 
 2. 모델의 손실함수 평균(Mean) 및 표준편차(Standard Deviation)
-1) Tunning model
+(1) Tunning model
 Normal signal Loss - Mean:  0.00267589  Std:  0.0011680671
 Fault signal Loss - Mean:  0.019644942  Std:  0.022774935
 
-2) Domain-Adaptation mdoel
+(2) Domain-Adaptation mdoel
 Normal signal Loss - Mean:  0.028704124  Std:  0.010606855
 Fault signal Loss - Mean:  0.04257906  Std:  0.017675094
 
 3. Precision, Recall and F1-score
-1) Tunning Model
+(1) Tunning Model
 
 - Precision: 0.9571
 - Recall: 0.9307
@@ -26,7 +26,7 @@ Tunning model | Predicted Negative  |  Predicted Positive
 Actual Negative   |      1327            |         71
 Actual Positive   |      118            |         1585
 
-3) Domain-Adaptation(DA) model
+(2) Domain-Adaptation(DA) model
 
 - Precision: 0.8248
 - Recall: 0.6442
