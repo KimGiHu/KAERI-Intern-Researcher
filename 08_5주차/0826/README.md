@@ -8,7 +8,13 @@ Proposed Normal Loss - Mean:  0.0010912528  Std:  0.0005026587
 Proposed Fault Loss - Mean:  0.020823535  Std:  0.027949354
 
 
-### Baseline Model
+### Baseline Model - Case1
+
+MSE Loss 함수를 사용할 때, 학습 시에 배치사이즈와 time step의 크기만큼 평균 내어서 학습한 경우
+
+Baseline Normal Loss - Mean:  0.015485567  Std:  0.003634747
+
+Baselin Fault Loss - Mean:  0.026580421  Std:  0.018456949
 
 ROC Curve에서 정상신호와 비정산신호를 구분하는 최적의 값 : 0.017287295311689377
 
@@ -27,8 +33,19 @@ Confusion Matrix:
 
 ![baseline Normal vs  Fault ROC Curve](https://github.com/user-attachments/assets/19061b81-f2c1-41b8-81ef-c94037a93f7c)
 
+### Baseline Model - Case1
+
+MSE Loss 함수를 사용할 때, reduction 기능을 'sum'으로 설정하고 학습한 경우
+
+
 
 ### Proposed Model
+
+MSE Loss 함수를 사용할 때, reduction 기능을 'sum'으로 설정하고 학습한 경우 + 활성화 함수 gelu + 학습률 변경(1e-5 --> 1e-3) + 학습 스케쥴러 추가
+
+Proposed Normal Loss - Mean:  0.0010912528  Std:  0.0005026587
+
+Proposed Fault Loss - Mean:  0.020823535  Std:  0.027949354
 
 ROC Curve에서 정상신호와 비정산신호를 구분하는 최적의 값 : 0.0033925846219062805
 
