@@ -1,4 +1,4 @@
-다양한 실험을 진행한 끝에 다음과 같은 결과를 얻었다.
+다양한 실험(학습 손실함수 조정, 학습률 및 스케쥴러 추가, 도메인 적응기법 네트워크 추가 등)을 진행한 끝에 다음과 같은 결과를 얻었다.
 
 ![activation gelu pretrained Normal vs  Fault ROC Curve](https://github.com/user-attachments/assets/4d01cc2a-fbcc-40ca-871a-07d1a0933ed6)
 
