@@ -24,6 +24,10 @@ Confusion Matrix:
 
  [ 828  875]]
 
+
+![baseline Normal vs  Fault ROC Curve](https://github.com/user-attachments/assets/19061b81-f2c1-41b8-81ef-c94037a93f7c)
+
+
 ### Proposed Model
 
 ROC Curve에서 정상신호와 비정산신호를 구분하는 최적의 값 : 0.0033925846219062805
@@ -39,4 +43,7 @@ Confusion Matrix:
 [[1389    9]
 
  [   1 1702]]
+
+
+![proposed Normal vs  Fault ROC Curve](https://github.com/user-attachments/assets/6b7f0803-8791-492e-9b3a-20753477dad3)
 
