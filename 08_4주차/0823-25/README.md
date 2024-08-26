@@ -1,9 +1,9 @@
 다양한 실험(학습 손실함수 조정, 학습률 및 스케쥴러 추가, 도메인 적응기법 네트워크 추가 등)을 진행한 끝에 다음과 같은 결과를 얻었다.
 
-1. ROC Curve 그래프
+### 1. ROC Curve 그래프
 ![activation gelu pretrained Normal vs  Fault ROC Curve](https://github.com/user-attachments/assets/4d01cc2a-fbcc-40ca-871a-07d1a0933ed6)
 
-2. 모델의 손실함수 평균(Mean) 및 표준편차(Standard Deviation)
+### 2. 모델의 손실함수 평균(Mean) 및 표준편차(Standard Deviation)
    
 (1) Tunning model
 
@@ -17,7 +17,7 @@
 
 - Fault signal Loss - Mean:  0.04257906  Std:  0.017675094
 
-3. Precision, Recall and F1-score
+### 3. Precision, Recall and F1-score
 (1) Tunning Model
 
 - Precision: 0.9571
