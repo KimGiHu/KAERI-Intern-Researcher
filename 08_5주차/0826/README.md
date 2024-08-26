@@ -1,12 +1,4 @@
-### Mean and Standard deviation
-Baseline Normal Loss - Mean:  0.015485567  Std:  0.003634747
-
-Baselin Fault Loss - Mean:  0.026580421  Std:  0.018456949
-
-Proposed Normal Loss - Mean:  0.0010912528  Std:  0.0005026587
-
-Proposed Fault Loss - Mean:  0.020823535  Std:  0.027949354
-
+# 실험내용
 
 ### Baseline Model - Case1
 
@@ -83,3 +75,30 @@ Confusion Matrix:
 
 ![proposed Normal vs  Fault ROC Curve](https://github.com/user-attachments/assets/6b7f0803-8791-492e-9b3a-20753477dad3)
 
+
+### 추가 실험건 : Loss function MSE를 reduction='mean'으로 실험하여봄.
+
+Baseline Normal Loss - Mean:  0.0031117005  Std:  0.0019744362
+
+Baseline Fault Loss - Mean:  0.017567148  Std:  0.013441928
+
+Proposed Normal Loss - Mean:  0.01558474  Std:  0.003659449
+
+Proposed Fault Loss - Mean:  0.026376178  Std:  0.018631684
+
+ROC Curve에서 정상신호와 비정산신호를 구분하는 최적의 값 : 0.01839718595147133
+
+Precision: 0.7998
+
+Recall: 0.4551
+
+F1-score: 0.5801
+
+Confusion Matrix:
+
+[[1204  194]
+
+ [ 928  775]]
+
+# 결론
+본 실험에 사용한 데이터에는 MSE Loss를 계산할 때, batch size와 time step을 한 epoch마다 평균값을 내어 계산한 것(reduction을 'mean'으로 설정한 것)보다 전체 합(reduction을 'sum'으로 설정)을 한 다음 학습을 진행한 모델이 더 성능이 뛰어나다는걸 확인할 수 있었다. 이는 이상치를 정밀하게 탐지하기 위해 신호를 복원하여 비교하는 해당 모델의 특수성을 고려한다면 적합한 학습방식이라고 볼 수 있다.
