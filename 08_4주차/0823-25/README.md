@@ -20,16 +20,22 @@ Fault signal Loss - Mean:  0.04257906  Std:  0.017675094
 - F1-score: 0.9437
 
 - Confusion Matrix:
-[[1327   71]
- [ 118 1585]]
-3) Domain-Adaptation model
+  Tunning model | Predicted Negative  |  Predicted Positive
+|:------:|:---:|:---:|
+Actual Negative   |      1327            |         71
+Actual Positive   |      118            |         1585
+
+3) Domain-Adaptation(DA) model
 
 - Precision: 0.8248
 - Recall: 0.6442
 - F1-score: 0.7234
 
 - Confusion Matrix:
-Table | prediction True | prediction Fault
+  DA model | Predicted Negative  |  Predicted Positive
+|:------:|:---:|:---:|
+Actual Negative   |      1327            |         71
+Actual Positive   |      118            |         1585
 
 [[1165  233]
  [ 606 1097]]
