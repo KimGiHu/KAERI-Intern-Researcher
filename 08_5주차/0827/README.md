@@ -215,7 +215,7 @@ by "Youden's J 통계량은 (TPR - FPR)의 최대값을 기준으로 최적의 t
 **Estimated Total Size (MB)**: 356.73  
 
 
-**계산복잡도(FLOPs) 비교**  
+## **계산복잡도(FLOPs) 비교**  
 [INFO] Register count_convNd() for <class 'torch.nn.modules.conv.Conv1d'>.  
 [INFO] Register count_normalization() for <class 'torch.nn.modules.batchnorm.BatchNorm1d'>.  
 [INFO] Register zero_ops() for <class 'torch.nn.modules.pooling.MaxPool1d'>.  
@@ -232,3 +232,13 @@ by "Youden's J 통계량은 (TPR - FPR)의 최대값을 기준으로 최적의 t
 [INFO] Register count_convNd() for <class 'torch.nn.modules.conv.ConvTranspose1d'>.  
 Baseline Model FLOPs: 3181237624.0, Parameters: 74470828.0  
 Proposed Model FLOPs: 3181237624.0, Parameters: 74470828.0  
+
+## 결론 
+모델의 구성과 계산복잡도는 동일하나 정밀도(precision), 재현율(Recall), F1-점수(F1-score), AUC(Area Under the ROC Curve) 값의 상향을 데이터와 오토 인코더 모델에 적합한 학습 방법을 제안하였다.
+
+- 학습과정에서 손실함수를 정규화 시키지 않음으로써, 정상신호와 비정상신호를 더 명확하게 구분할 수 있었다. (손실함수를 튜닝함.)  
+- 활성화함수를 ReLU에서 GELU로 변경하고, 학습률을 1e-3으로 올림과 동시에 학습률 스케쥴러를 추가하여 더 향상된 성능을 보여주는 모델을 찾았다.  
+- 기존의 논문에서는 임의의 정상데이터와 비정상데이터를 선택하였으나, 본 실험에서는 비정상데이터 전체와 정상데이터의 비율을 1대1로 맞춘 테스트에서도 기존 모델보다 향상된 분류성능을 보여줌으로써 실제 가속기 운영상황에서도 적용가능성이 높도록 하는 모델을 학습해내었다.
+
+## 추가연구
+실제 현장 데이터에도 학습한 모델을 미세조정(Fine-Tunning)하여 사용하거나, 전이학습 후 추가학습을 통해서 실용성이 높은 모델을 만드는데 기여할 수 있을 것으로 판단된다.
