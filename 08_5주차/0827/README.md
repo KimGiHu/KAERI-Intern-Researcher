@@ -2,8 +2,8 @@
 
 # 1. 이상치 탐지 성능비교 : F1-score, AUC
 
-정상신호와 비정상신호간의 Youden's J 통계량을 임계값(Threshold Value)로 설정하고, 이보다 크면 정상 작으면 비정상으로 분류한다.
-
+정상신호와 비정상신호간의 Youden's J 통계량을 임계값(Threshold Value)로 설정하고, 이보다 크면 정상 작으면 비정상으로 분류한다.  
+by "Youden's J 통계량은 (TPR - FPR)의 최대값을 기준으로 최적의 threshold를 선택한다"
 ## Baseline Model 
 
 **Reduction : Mean**
@@ -16,8 +16,6 @@
   Fault Signal Loss |  0.02658  |  0.01846
 
 - ROC Curve에서 정상신호와 비정산신호를 구분하는 최적의 값 : 0.017287295311689377  
-  by "Youden's J 통계량은 (TPR - FPR)의 최대값을 기준으로 최적의 threshold를 선택한다"
-  
 - Precision, Recall and F1-Score
 
   Baseline Model Precision : 875/(875+238) = 0.7862  
@@ -43,7 +41,6 @@
   Fault Signal Loss |  0.01757  |  0.01344
 
 - ROC Curve에서 정상신호와 비정산신호를 구분하는 최적의 값 : 0.004985465202480555  
-  by "Youden's J 통계량은 (TPR - FPR)의 최대값을 기준으로 최적의 threshold를 선택한다"
   
 - Precision, Recall and F1-Score
 
@@ -71,7 +68,6 @@
   Fault Signal Loss |  0.02638  |  0.01863
 
 - ROC Curve에서 정상신호와 비정산신호를 구분하는 최적의 값 : 0.01839718595147133  
-  by "Youden's J 통계량은 (TPR - FPR)의 최대값을 기준으로 최적의 threshold를 선택한다"
   
 - Precision, Recall and F1-Score
 
@@ -99,7 +95,6 @@
   Fault Signal Loss |  0.02082  |  0.02795
   
 - ROC Curve에서 정상신호와 비정산신호를 구분하는 최적의 값 : 0.0033925846219062805  
-  by "Youden's J 통계량은 (TPR - FPR)의 최대값을 기준으로 최적의 threshold를 선택한다"
   
 - Precision, Recall and F1-Score
 
