@@ -2,4 +2,15 @@
 
 1. 분류성능비교 : F1-score, AUC
 
+[ Baseline Model - Reduction : 'Mean']
+
+Baseline Normal Loss - Mean:  0.01549  Std:  0.00363
+
+Baseline Fault Loss - Mean:  0.02658  Std:  0.01846
+
+ROC Curve에서 정상신호와 비정산신호를 구분하는 최적의 값 : 0.017287295311689377 by "Youden's J 통계량은 (TPR - FPR)의 최대값을 기준으로 최적의 threshold를 선택한다"
+
+[ Proposed Model - Reduction : 'Mean']
+
+
 2. 모델의 크기 및 최종 손실함수 값 비교
