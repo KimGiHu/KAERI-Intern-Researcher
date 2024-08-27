@@ -15,16 +15,13 @@
   Normal Signal Loss |   0.01549 |   0.00363
   Fault Signal Loss |  0.02658  |  0.01846
 
-- ROC Curve에서 정상신호와 비정산신호를 구분하는 최적의 값 : 0.017287295311689377
- 
+- ROC Curve에서 정상신호와 비정산신호를 구분하는 최적의 값 : 0.017287295311689377  
   by "Youden's J 통계량은 (TPR - FPR)의 최대값을 기준으로 최적의 threshold를 선택한다"
   
 - Precision, Recall and F1-Score
 
-  Baseline Model Precision : 875/(875+238) = 0.7862
-
-  Baseline Model Recall : 875/(875+828) = 0.5138
-
+  Baseline Model Precision : 875/(875+238) = 0.7862  
+  Baseline Model Recall : 875/(875+828) = 0.5138  
   Baseline Model F1-score : 0.6214
   
   Table | Predicted Normal | Predicted Fault
@@ -45,16 +42,13 @@
   Normal Signal Loss |   0.00311 |   0.00197
   Fault Signal Loss |  0.01757  |  0.01344
 
-- ROC Curve에서 정상신호와 비정산신호를 구분하는 최적의 값 : 0.004985465202480555
- 
+- ROC Curve에서 정상신호와 비정산신호를 구분하는 최적의 값 : 0.004985465202480555  
   by "Youden's J 통계량은 (TPR - FPR)의 최대값을 기준으로 최적의 threshold를 선택한다"
   
 - Precision, Recall and F1-Score
 
   Baseline Model Precision : 1680/(1680+238) = 0.8955  
-
-  Baseline Model Recall : 1680/(1680+23) = 0.9865
-
+  Baseline Model Recall : 1680/(1680+23) = 0.9865  
   Baseline Model F1-score : 0.9388
   
   Table | Predicted Normal | Predicted Fault
@@ -76,16 +70,13 @@
   Normal Signal Loss |   0.01558 |   0.00366
   Fault Signal Loss |  0.02638  |  0.01863
 
-- ROC Curve에서 정상신호와 비정산신호를 구분하는 최적의 값 : 0.01839718595147133
- 
+- ROC Curve에서 정상신호와 비정산신호를 구분하는 최적의 값 : 0.01839718595147133  
   by "Youden's J 통계량은 (TPR - FPR)의 최대값을 기준으로 최적의 threshold를 선택한다"
   
 - Precision, Recall and F1-Score
 
-  Proposed Model Precision: 0.7998
-
-  Proposed Model Recall: 0.4551
-
+  Proposed Model Precision: 0.7998  
+  Proposed Model Recall: 0.4551  
   Proposed Model F1-score: 0.5801
   
   Table | Predicted Normal | Predicted Fault
@@ -107,16 +98,13 @@
   Normal Signal Loss |   0.00109 |   0.00050
   Fault Signal Loss |  0.02082  |  0.02795
   
-- ROC Curve에서 정상신호와 비정산신호를 구분하는 최적의 값 : 0.0033925846219062805
- 
+- ROC Curve에서 정상신호와 비정산신호를 구분하는 최적의 값 : 0.0033925846219062805  
   by "Youden's J 통계량은 (TPR - FPR)의 최대값을 기준으로 최적의 threshold를 선택한다"
   
 - Precision, Recall and F1-Score
 
   Baseline Model Precision : 1702/(1702+9) = 0.9947  
-
-  Baseline Model Recall : 1702/(1+1702) = 0.9994
-
+  Baseline Model Recall : 1702/(1+1702) = 0.9994  
   Baseline Model F1-score : 0.9971
   
   Table | Predicted Normal | Predicted Fault
