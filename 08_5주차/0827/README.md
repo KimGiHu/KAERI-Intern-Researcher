@@ -60,7 +60,7 @@
   Actual Normal |   1202 |   196
   Actual Fault |  23  |  1680
   
-- AUC : 0.93
+- AUC : 0.97
 
   ![Baseline Model Reduction-sum Normal vs  Fault ROC Curve](https://github.com/user-attachments/assets/03611210-583e-4a40-a42e-d4f097db65d0)
 
