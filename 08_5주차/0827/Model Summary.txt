@@ -1,0 +1,116 @@
+True
+Baseline Model parameters: 74470828
+Proposed Model parameters: 74470828
+Baseline Summary:
+==========================================================================================
+Layer (type:depth-idx)                   Output Shape              Param #
+==========================================================================================
+CVAE_baseline                            [2, 14, 4500]             --
+├─Encoder_baseline: 1-1                  [2, 512]                  --
+│    └─Conv1d: 2-1                       [2, 128, 4501]            21,632
+│    └─BatchNorm1d: 2-2                  [2, 128, 4501]            256
+│    └─MaxPool1d: 2-3                    [2, 128, 2245]            --
+│    └─Dropout: 2-4                      [2, 128, 2245]            --
+│    └─Conv1d: 2-5                       [2, 128, 2246]            196,736
+│    └─BatchNorm1d: 2-6                  [2, 128, 2246]            256
+│    └─MaxPool1d: 2-7                    [2, 128, 1118]            --
+│    └─Dropout: 2-8                      [2, 128, 1118]            --
+│    └─Conv1d: 2-9                       [2, 128, 1119]            196,736
+│    └─BatchNorm1d: 2-10                 [2, 128, 1119]            256
+│    └─MaxPool1d: 2-11                   [2, 128, 554]             --
+│    └─Dropout: 2-12                     [2, 128, 554]             --
+│    └─Linear: 2-13                      [2, 512]                  36,307,456
+│    └─BatchNorm1d: 2-14                 [2, 527]                  1,054
+│    └─Linear: 2-15                      [2, 512]                  270,336
+│    └─Linear: 2-16                      [2, 512]                  270,336
+├─Decoder_baseline: 1-2                  [2, 14, 4500]             --
+│    └─Linear: 2-17                      [2, 512]                  270,336
+│    └─Linear: 2-18                      [2, 70912]                36,377,856
+│    └─BatchNorm1d: 2-19                 [2, 70912]                141,824
+│    └─Upsample: 2-20                    [2, 128, 1108]            --
+│    └─BatchNorm1d: 2-21                 [2, 128, 1108]            256
+│    └─ConvTranspose1d: 2-22             [2, 128, 1107]            196,736
+│    └─Dropout: 2-23                     [2, 128, 1107]            --
+│    └─Upsample: 2-24                    [2, 128, 2214]            --
+│    └─BatchNorm1d: 2-25                 [2, 128, 2214]            256
+│    └─ConvTranspose1d: 2-26             [2, 128, 2213]            196,736
+│    └─Dropout: 2-27                     [2, 128, 2213]            --
+│    └─Upsample: 2-28                    [2, 128, 4491]            --
+│    └─BatchNorm1d: 2-29                 [2, 128, 4491]            256
+│    └─ConvTranspose1d: 2-30             [2, 14, 4500]             21,518
+==========================================================================================
+Total params: 74,470,828
+Trainable params: 74,470,828
+Non-trainable params: 0
+Total mult-adds (G): 3.17
+==========================================================================================
+Input size (MB): 0.50
+Forward/backward pass size (MB): 58.34
+Params size (MB): 297.88
+Estimated Total Size (MB): 356.73
+==========================================================================================
+
+Proposed 2 Summary:
+==========================================================================================
+Layer (type:depth-idx)                   Output Shape              Param #
+==========================================================================================
+CVAE_rev                                 [2, 14, 4500]             --
+├─Encoder_rev: 1-1                       [2, 512]                  --
+│    └─Conv1d: 2-1                       [2, 128, 4501]            21,632
+│    └─BatchNorm1d: 2-2                  [2, 128, 4501]            256
+│    └─MaxPool1d: 2-3                    [2, 128, 2245]            --
+│    └─Dropout: 2-4                      [2, 128, 2245]            --
+│    └─Conv1d: 2-5                       [2, 128, 2246]            196,736
+│    └─BatchNorm1d: 2-6                  [2, 128, 2246]            256
+│    └─MaxPool1d: 2-7                    [2, 128, 1118]            --
+│    └─Dropout: 2-8                      [2, 128, 1118]            --
+│    └─Conv1d: 2-9                       [2, 128, 1119]            196,736
+│    └─BatchNorm1d: 2-10                 [2, 128, 1119]            256
+│    └─MaxPool1d: 2-11                   [2, 128, 554]             --
+│    └─Dropout: 2-12                     [2, 128, 554]             --
+│    └─Linear: 2-13                      [2, 512]                  36,307,456
+│    └─BatchNorm1d: 2-14                 [2, 527]                  1,054
+│    └─Linear: 2-15                      [2, 512]                  270,336
+│    └─Linear: 2-16                      [2, 512]                  270,336
+├─Decoder_rev: 1-2                       [2, 14, 4500]             --
+│    └─Linear: 2-17                      [2, 512]                  270,336
+│    └─Linear: 2-18                      [2, 70912]                36,377,856
+│    └─BatchNorm1d: 2-19                 [2, 70912]                141,824
+│    └─Upsample: 2-20                    [2, 128, 1108]            --
+│    └─BatchNorm1d: 2-21                 [2, 128, 1108]            256
+│    └─ConvTranspose1d: 2-22             [2, 128, 1107]            196,736
+│    └─Dropout: 2-23                     [2, 128, 1107]            --
+│    └─Upsample: 2-24                    [2, 128, 2214]            --
+│    └─BatchNorm1d: 2-25                 [2, 128, 2214]            256
+│    └─ConvTranspose1d: 2-26             [2, 128, 2213]            196,736
+│    └─Dropout: 2-27                     [2, 128, 2213]            --
+│    └─Upsample: 2-28                    [2, 128, 4491]            --
+│    └─BatchNorm1d: 2-29                 [2, 128, 4491]            256
+│    └─ConvTranspose1d: 2-30             [2, 14, 4500]             21,518
+==========================================================================================
+Total params: 74,470,828
+Trainable params: 74,470,828
+Non-trainable params: 0
+Total mult-adds (G): 3.17
+==========================================================================================
+Input size (MB): 0.50
+Forward/backward pass size (MB): 58.34
+Params size (MB): 297.88
+Estimated Total Size (MB): 356.73
+==========================================================================================
+[INFO] Register count_convNd() for <class 'torch.nn.modules.conv.Conv1d'>.
+[INFO] Register count_normalization() for <class 'torch.nn.modules.batchnorm.BatchNorm1d'>.
+[INFO] Register zero_ops() for <class 'torch.nn.modules.pooling.MaxPool1d'>.
+[INFO] Register zero_ops() for <class 'torch.nn.modules.dropout.Dropout'>.
+[INFO] Register count_linear() for <class 'torch.nn.modules.linear.Linear'>.
+[INFO] Register count_upsample() for <class 'torch.nn.modules.upsampling.Upsample'>.
+[INFO] Register count_convNd() for <class 'torch.nn.modules.conv.ConvTranspose1d'>.
+[INFO] Register count_convNd() for <class 'torch.nn.modules.conv.Conv1d'>.
+[INFO] Register count_normalization() for <class 'torch.nn.modules.batchnorm.BatchNorm1d'>.
+[INFO] Register zero_ops() for <class 'torch.nn.modules.pooling.MaxPool1d'>.
+[INFO] Register zero_ops() for <class 'torch.nn.modules.dropout.Dropout'>.
+[INFO] Register count_linear() for <class 'torch.nn.modules.linear.Linear'>.
+[INFO] Register count_upsample() for <class 'torch.nn.modules.upsampling.Upsample'>.
+[INFO] Register count_convNd() for <class 'torch.nn.modules.conv.ConvTranspose1d'>.
+Baseline Model FLOPs: 3181237624.0, Parameters: 74470828.0
+Proposed Model FLOPs: 3181237624.0, Parameters: 74470828.0
