@@ -7,8 +7,10 @@
 **Reduction : Mean**
 
 - Mean and Loss
-  Normal Signal Loss - Mean:  0.01549  Std:  0.00363
-  Fault Signal Loss - Mean:  0.02658  Std:  0.01846
+  Table | Mean | Standard Deviation
+  |:-:|:-:|:-:|
+  Normal Signal Loss |   0.01549 |   0.00363
+  Fault Signal Loss |  0.02658  |  0.01846
 
 ROC Curve에서 정상신호와 비정산신호를 구분하는 최적의 값 : 0.017287295311689377 
 
