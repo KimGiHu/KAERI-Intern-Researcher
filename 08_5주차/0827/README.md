@@ -33,6 +33,36 @@
 - AUC : 0.73
 
   ![Baseline Model Normal vs  Fault ROC Curve](https://github.com/user-attachments/assets/290f9fd7-1822-4bab-9183-3447eab6c9d9)
+- - - - - - - - 
+**Reduction : Sum**
+
+- Mean and Loss
+  
+  Table | Mean | Standard Deviation
+  |:-:|:-:|:-:|
+  Normal Signal Loss |   0.00311 |   0.00197
+  Fault Signal Loss |  0.01757  |  0.01344
+
+- ROC Curve에서 정상신호와 비정산신호를 구분하는 최적의 값 : 0.004985465202480555
+ 
+  by "Youden's J 통계량은 (TPR - FPR)의 최대값을 기준으로 최적의 threshold를 선택한다"
+  
+- Precision, Recall and F1-Score
+
+  Baseline Model Precision : 1680/(1680+238) = 0.8955  
+
+  Baseline Model Recall : 1680/(1680+23) = 0.9865
+
+  Baseline Model F1-score : 0.9388
+  
+  Table | Predicted Normal | Predicted Fault
+  |:-:|:-:|:-:|
+  Actual Normal |   1202 |   196
+  Actual Fault |  23  |  1680
+  
+- AUC : 0.93
+
+  ![Baseline Model Reduction-sum Normal vs  Fault ROC Curve](https://github.com/user-attachments/assets/03611210-583e-4a40-a42e-d4f097db65d0)
 
 ## Proposed Model
 
@@ -62,7 +92,38 @@
   Actual Fault |  928  |  775
   
 - AUC : 0.70
+  
+    ![Proposed Model Normal vs  Fault ROC Curve](https://github.com/user-attachments/assets/269a972a-b465-4896-971a-12e47f1d5b39)
+  
+- - - - - -
+**Reduction : Sum**
 
-  ![Proposed Model Normal vs  Fault ROC Curve](https://github.com/user-attachments/assets/269a972a-b465-4896-971a-12e47f1d5b39)
+- Mean and Loss
+  
+  Table | Mean | Standard Deviation
+  |:-:|:-:|:-:|
+  Normal Signal Loss |   0.00109 |   0.00050
+  Fault Signal Loss |  0.02082  |  0.02795
+  
+- ROC Curve에서 정상신호와 비정산신호를 구분하는 최적의 값 : 0.0033925846219062805
+ 
+  by "Youden's J 통계량은 (TPR - FPR)의 최대값을 기준으로 최적의 threshold를 선택한다"
+  
+- Precision, Recall and F1-Score
+
+  Baseline Model Precision : 1702/(1702+9) = 0.9947  
+
+  Baseline Model Recall : 1702/(1+1702) = 0.9994
+
+  Baseline Model F1-score : 0.9971
+  
+  Table | Predicted Normal | Predicted Fault
+  |:-:|:-:|:-:|
+  Actual Normal |   1389 |   9
+  Actual Fault |  1  |  1702
+
+- AUC : 1.00
+  
+  ![Proposed Model Reduction-sum Normal vs  Fault ROC Curve](https://github.com/user-attachments/assets/de7d3901-5c9e-42ac-aee6-f9ec94acf702)
 
 2. 모델의 크기 및 최종 손실함수 값 비교
