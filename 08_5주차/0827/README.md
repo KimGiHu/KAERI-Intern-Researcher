@@ -1,8 +1,10 @@
 실험내용 총 정리를 위해서 종합적인 모델의 성능비교가 필요함.
 
-1. 분류성능비교 : F1-score, AUC
+# 1. 분류성능비교 : F1-score, AUC
 
-[ Baseline Model - Reduction : 'Mean']
+## 1. Baseline Model 
+
+### 1-1. Reduction : 'Mean'
 
 Baseline Normal Loss - Mean:  0.01549  Std:  0.00363
 
