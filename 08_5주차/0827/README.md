@@ -2,11 +2,11 @@
 
 # 1. 분류성능비교 : F1-score, AUC
 
-## 1. Baseline Model 
+## Baseline Model 
 
 **Reduction : Mean**
 
-1) 
+1) Mean and Loss
 Normal Signal Loss - Mean:  0.01549  Std:  0.00363
 
 Fault Signal Loss - Mean:  0.02658  Std:  0.01846
