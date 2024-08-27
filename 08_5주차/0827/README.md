@@ -126,4 +126,4 @@
   
   ![Proposed Model Reduction-sum Normal vs  Fault ROC Curve](https://github.com/user-attachments/assets/de7d3901-5c9e-42ac-aee6-f9ec94acf702)
 
-2. 모델의 크기 및 최종 손실함수 값 비교
+# 2. 모델의 크기 및 최종 손실함수 값 비교
