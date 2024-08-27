@@ -33,7 +33,7 @@
 - AUC : 0.73
 
   ![Baseline Model Normal vs  Fault ROC Curve](https://github.com/user-attachments/assets/290f9fd7-1822-4bab-9183-3447eab6c9d9)
-- - - - - - - - 
+
 **Reduction : Sum**
 
 - Mean and Loss
@@ -95,7 +95,7 @@
   
     ![Proposed Model Normal vs  Fault ROC Curve](https://github.com/user-attachments/assets/269a972a-b465-4896-971a-12e47f1d5b39)
   
-- - - - - -
+
 **Reduction : Sum**
 
 - Mean and Loss
@@ -126,4 +126,5 @@
   
   ![Proposed Model Reduction-sum Normal vs  Fault ROC Curve](https://github.com/user-attachments/assets/de7d3901-5c9e-42ac-aee6-f9ec94acf702)
 
+- - - - - -
 # 2. 모델의 크기 및 최종 손실함수 값 비교
