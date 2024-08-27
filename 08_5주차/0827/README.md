@@ -30,17 +30,13 @@
   Actual Normal |   1160 |   238
   Actual Fault |  828  |  875
   
-- AUC : 1.0
+- AUC : 0.73
 
   ![Baseline Model Normal vs  Fault ROC Curve](https://github.com/user-attachments/assets/290f9fd7-1822-4bab-9183-3447eab6c9d9)
 
 ## Proposed Model
 
 **Reduction : Mean**
-
-Proposed Model Precision: 0.7998
-Proposed Model Recall: 0.4551
-Proposed Model F1-score: 0.5801
 
 - Mean and Loss
   Table | Mean | Standard Deviation
@@ -53,5 +49,20 @@ Proposed Model F1-score: 0.5801
   by "Youden's J 통계량은 (TPR - FPR)의 최대값을 기준으로 최적의 threshold를 선택한다"
   
 - Precision, Recall and F1-Score
-- AUC : 1.0
+
+  Proposed Model Precision: 0.7998
+
+  Proposed Model Recall: 0.4551
+
+  Proposed Model F1-score: 0.5801
+  
+  Table | Predicted Normal | Predicted Fault
+  |:-:|:-:|:-:|
+  Actual Normal |   1204 |   194
+  Actual Fault |  928  |  775
+  
+- AUC : 0.70
+
+  ![Proposed Model Normal vs  Fault ROC Curve](https://github.com/user-attachments/assets/269a972a-b465-4896-971a-12e47f1d5b39)
+
 2. 모델의 크기 및 최종 손실함수 값 비교
