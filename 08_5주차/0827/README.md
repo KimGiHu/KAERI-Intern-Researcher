@@ -4,7 +4,7 @@
 
 ## 1. Baseline Model 
 
-### 1-1. Reduction : 'Mean'
+** Reduction : 'Mean' **
 
 Baseline Normal Loss - Mean:  0.01549  Std:  0.00363
 
