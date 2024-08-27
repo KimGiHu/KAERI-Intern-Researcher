@@ -232,7 +232,7 @@
 **Estimated Total Size (MB)**: 356.73  
 
 
-**계산복잡도(FLOPs) 비교**
+**계산복잡도(FLOPs) 비교**  
 [INFO] Register count_convNd() for <class 'torch.nn.modules.conv.Conv1d'>.  
 [INFO] Register count_normalization() for <class 'torch.nn.modules.batchnorm.BatchNorm1d'>.  
 [INFO] Register zero_ops() for <class 'torch.nn.modules.pooling.MaxPool1d'>.  
