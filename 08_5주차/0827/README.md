@@ -6,6 +6,7 @@
 
 **Reduction : Mean**
 
+1) 
 Normal Signal Loss - Mean:  0.01549  Std:  0.00363
 
 Fault Signal Loss - Mean:  0.02658  Std:  0.01846
