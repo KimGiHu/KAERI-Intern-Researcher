@@ -233,19 +233,19 @@
 
 
 **계산복잡도(FLOPs) 비교**
-[INFO] Register count_convNd() for <class 'torch.nn.modules.conv.Conv1d'>.
-[INFO] Register count_normalization() for <class 'torch.nn.modules.batchnorm.BatchNorm1d'>.
-[INFO] Register zero_ops() for <class 'torch.nn.modules.pooling.MaxPool1d'>.
-[INFO] Register zero_ops() for <class 'torch.nn.modules.dropout.Dropout'>.
-[INFO] Register count_linear() for <class 'torch.nn.modules.linear.Linear'>.
-[INFO] Register count_upsample() for <class 'torch.nn.modules.upsampling.Upsample'>.
-[INFO] Register count_convNd() for <class 'torch.nn.modules.conv.ConvTranspose1d'>.
-[INFO] Register count_convNd() for <class 'torch.nn.modules.conv.Conv1d'>.
-[INFO] Register count_normalization() for <class 'torch.nn.modules.batchnorm.BatchNorm1d'>.
-[INFO] Register zero_ops() for <class 'torch.nn.modules.pooling.MaxPool1d'>.
-[INFO] Register zero_ops() for <class 'torch.nn.modules.dropout.Dropout'>.
-[INFO] Register count_linear() for <class 'torch.nn.modules.linear.Linear'>.
-[INFO] Register count_upsample() for <class 'torch.nn.modules.upsampling.Upsample'>.
-[INFO] Register count_convNd() for <class 'torch.nn.modules.conv.ConvTranspose1d'>.
-Baseline Model FLOPs: 3181237624.0, Parameters: 74470828.0
-Proposed Model FLOPs: 3181237624.0, Parameters: 74470828.0
+[INFO] Register count_convNd() for <class 'torch.nn.modules.conv.Conv1d'>.  
+[INFO] Register count_normalization() for <class 'torch.nn.modules.batchnorm.BatchNorm1d'>.  
+[INFO] Register zero_ops() for <class 'torch.nn.modules.pooling.MaxPool1d'>.  
+[INFO] Register zero_ops() for <class 'torch.nn.modules.dropout.Dropout'>.  
+[INFO] Register count_linear() for <class 'torch.nn.modules.linear.Linear'>.  
+[INFO] Register count_upsample() for <class 'torch.nn.modules.upsampling.Upsample'>.  
+[INFO] Register count_convNd() for <class 'torch.nn.modules.conv.ConvTranspose1d'>.  
+[INFO] Register count_convNd() for <class 'torch.nn.modules.conv.Conv1d'>.  
+[INFO] Register count_normalization() for <class 'torch.nn.modules.batchnorm.BatchNorm1d'>.  
+[INFO] Register zero_ops() for <class 'torch.nn.modules.pooling.MaxPool1d'>.  
+[INFO] Register zero_ops() for <class 'torch.nn.modules.dropout.Dropout'>.  
+[INFO] Register count_linear() for <class 'torch.nn.modules.linear.Linear'>.  
+[INFO] Register count_upsample() for <class 'torch.nn.modules.upsampling.Upsample'>.  
+[INFO] Register count_convNd() for <class 'torch.nn.modules.conv.ConvTranspose1d'>.  
+Baseline Model FLOPs: 3181237624.0, Parameters: 74470828.0  
+Proposed Model FLOPs: 3181237624.0, Parameters: 74470828.0  
