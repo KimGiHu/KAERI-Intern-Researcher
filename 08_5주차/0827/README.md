@@ -1,6 +1,8 @@
 실험내용 총 정리를 위해서 종합적인 모델의 성능비교가 필요함.
 
-# 1. 분류성능비교 : F1-score, AUC
+# 1. 이상치 탐지 성능비교 : F1-score, AUC
+
+정상신호와 비정상신호간의 Youden's J 통계량을 임계값(Threshold Value)로 설정하고, 이보다 크면 정상 작으면 비정상으로 분류한다.
 
 ## Baseline Model 
 
