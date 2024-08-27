@@ -170,6 +170,7 @@
 | │ └─ConvTranspose1d: 2-30| [2, 14, 4500]       | 21,518    |
 
 **activation function** : ReLU
+
 **Total params**: 74,470,828  
 **Trainable params**: 74,470,828  
 **Non-trainable params**: 0  
@@ -220,6 +221,7 @@
 | │ └─ConvTranspose1d: 2-30| [2, 14, 4500]       | 21,518      |
 
 **activation function : GELU**
+
 **Total params**: 74,470,828  
 **Trainable params**: 74,470,828  
 **Non-trainable params**: 0  
