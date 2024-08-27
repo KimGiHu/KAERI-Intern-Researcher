@@ -16,7 +16,6 @@
  
   by "Youden's J 통계량은 (TPR - FPR)의 최대값을 기준으로 최적의 threshold를 선택한다"
 
-[ Proposed Model - Reduction : 'Mean']
-
+[ Proposed Model
 
 2. 모델의 크기 및 최종 손실함수 값 비교
