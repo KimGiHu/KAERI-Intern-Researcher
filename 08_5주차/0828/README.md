@@ -1,10 +1,10 @@
+# 코드 설명
 
-# 1. 배경설명
+baseline.py 
+train.py
+roc_curve.py
+plot_kde.py
+plot_boxplot.py
+plot_tsne.py
 
-# 2. 데이터 전처리
 
-# 3. 모델 및 손실함수, 학습 파라미터 변경점
-
-# 4. 이상치 탐지 성능 비교 및 모델 학습 파라미터, 계산복잡도(FLOPs) 비교
-
-# 5. 결론
