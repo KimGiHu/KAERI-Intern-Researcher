@@ -16,4 +16,5 @@
 
 ## plot_tsne.py
 
+## plot_gaussian.py
 
