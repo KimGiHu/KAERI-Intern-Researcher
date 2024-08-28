@@ -12,7 +12,7 @@
 
 ## plot_kde.py
 
-## plot_boxplot.py
+## plot_box.py
 
 ## plot_tsne.py
 
